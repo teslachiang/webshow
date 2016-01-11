@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+     <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="/static/bt/css/bootstrap.min.css">
+
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="/static/bt/css/bootstrap-theme.min.css">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="/static/bt/js/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="/static/bt/js/bootstrap.min.js"></script>
+
+    <title>{{title or "SOBOB"}}</title>
+
+    <style type="text/css" media="screen">
+      .container{
+      width:100%;
+      }
+
+       .well{
+      text-align: center;
+      }
+      .title{
+      font-size:5em;   
+      font-family: -webkit-pictograph;
+      text-shadow: 1px 2px 2px gray;
+      }
+      
+      
+    </style>
+  </head>
+  <body>
+    
+    <div class="well well-lg">
+      <span class="title">个人信息</span>
+    </div>
+
+    {{!include}}
+    <script type="text/javascript">
+  $(function(){
+     $(".footerblock li[class=active]").removeClass("active");
+     $("#footerme").addClass("active");
+  })
+</script>
+  </body>
+</html>
+
+
+
+

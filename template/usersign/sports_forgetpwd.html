@@ -1,0 +1,60 @@
+%include('register_base.tpl', title="找回密码")
+
+<style type="text/css" media="screen">
+</style>
+
+<div class="usersign_cbody">
+  
+<form>
+  <div class="input-group">
+    <div class="input-group-addon"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span></div>
+    <input type="text" class="form-control" maxlength="11" id="phonenumber" placeholder="注册邮箱">
+    <input type="text" id="username" style="display:none">
+  </div>
+ 
+<p><a href="@" id="getpassword" class="btn btn-default">获取密码</a></p> 
+
+</form>
+</div>
+
+<p class="alertinfo">
+  <div class="alert alert-info" role="alert" style="display:none">
+  </div>
+</p>
+
+<script type="text/javascript">
+  function cleanalert(){
+     $(".alert").empty();
+     $(".alert").hide();
+  }
+  $("#getpassword").click(function(){
+    $(".alert").empty();
+
+    var phonenumbercheck = /^(((13[0-9]{1})|159|153)+\d{8})$/;;
+    var phonenumber = $("#phonenumber").val();
+    var username = $("#username").val();
+    if(phonenumbercheck.test(phonenumber) == false){
+         $(".alert").append("<strong>警告！</strong>电话号码错误！");
+       $(".alert").show();
+       setTimeout("cleanalert()", 3000);
+       return false;
+    }else{
+       $.post("/checkuserphonenumber", {user:username}, function(data){
+             if(data != "0"){
+                   if(data == "-1"){
+                      $(".alert").append("<strong>警告！</strong>未找到用户名");
+                 }else{
+                    $(".alert").append("<strong>警告！</strong>电话号码尚未注册");
+                 }
+                 $(".alert").show();
+                 setTimeout("cleanalert()", 3000);
+                 return false;
+           }else{
+                window.location.href="/sports";
+           }
+      });
+    }
+
+  })
+
+</script>

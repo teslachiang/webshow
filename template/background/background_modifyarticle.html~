@@ -1,0 +1,1 @@
+%include("background.tpl", title="user modify article")

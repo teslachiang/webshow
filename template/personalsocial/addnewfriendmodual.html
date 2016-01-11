@@ -1,0 +1,52 @@
+%include("sports_pagebase.tpl", title="好友列表")
+
+<style type="text/css" media="screen">
+  .searchinputgroup input{
+  height: 100px;
+  font-size: 40px;
+  }
+</style>
+
+<div class="container">
+  <div class="input-group searchinputgroup">
+    <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search"></span></span>
+    <input type="text" class="form-control" placeholder="昵称\注册号" aria-describedby="basic-addon1">
+  </div>
+
+  <hr />
+
+  <div class="searchresultlist">
+    
+  </div>
+
+</div>
+
+
+<script type="text/javascript">
+  $(function(){
+     // test session operation!!
+     var lstorage;
+     %if flag == 0:
+       lstorage = new Array();
+       lstorage.push("testtowhosee1");
+       lstorage.push("testtowhosee2");
+       lstorage.push("testtowhosee3");
+       localStorage["towhosee"] = JSON.stringify(lstorage)
+     %elif flag == 1:
+       lstorage = new Array();
+       lstorage.push("abc1");
+       lstorage.push("abc2");
+       lstorage.push("abc3");
+       localStorage["blocktosee"] = JSON.stringify(lstorage)
+     %end
+  })
+</script>
+
+<script type="text/javascript">
+   $(function(){
+    $(".titlewell .title").text("好友列表");
+    $(".titlewell").prepend('<span class="glyphicon glyphicon-arrow-left" onClick="javascript:history.back(-1)"></span>');
+    $(".titlewell").append('<span class="glyphicon glyphicon-ok-circle" onclick="addnewfriendstosession()"></span>');
+  })
+</script>
+

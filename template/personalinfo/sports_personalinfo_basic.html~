@@ -1,0 +1,107 @@
+%include('sports_pagebase.tpl', title="个人信息")
+
+<link  href="/static/cropper/cropper.css" rel="stylesheet">
+<script src="/static/cropper/cropper.js"></script>
+<link rel="stylesheet" href="/static/css/userbasicinfo.css" type="text/css" media="screen" />
+
+<script type="text/javascript" src="/static/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="/static/js/jquery.shCircleLoader-min.js"></script>
+
+<div class="container">
+  <table class="table userinfotable">
+    <tr>
+      <td><span type="first">头像<span></td>
+      <td id="shortcut"><img src="{{userinfo['shortcut']}}" class="" alt="" /></td>
+    </tr>
+    <tr>
+      <td><span type="first">昵称</span></td>
+      <td id="shortname">
+        <span type="second" class="label label-success">
+          %if userinfo['nickname'] in [None, ""]:
+          {{userinfo['username']}}
+          %else:
+          {{userinfo['nickname']}}
+          %end
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td><span type="first">注册号</span></td>
+      <td id="regcode"><span type="second" class="label label-default">{{userinfo['regcode']}}</span></td>
+    </tr>
+    <tr>
+      <td><span type="first">二维码名片</span></td>
+      <td id="qrcode"><span type="second" class="glyphicon glyphicon-qrcode"></span></td>
+    </tr>
+    <tr>
+      <td><span type="first">联系方式</span></td>
+      <td id="contact"><span type="second" class="label label-info">
+          %if userinfo['contact'] is None:
+          暂无
+          %else:
+          查看详情
+          %end
+        </span>
+      </td>
+    </tr>
+    
+    <tr>
+      <td><span type="first">性别</span></td>
+      <td id="sex">
+        <span type="second" class="label label-warning">
+          %if userinfo['sex'] in [None, ""]:
+          男
+          %else:
+          {{userinfo['sex']}}
+          %end
+        </span>
+    </td>
+    </tr>
+    <tr>
+      <td><span type="first">地区</span></td> 
+      <td id="area"><span type="second"  class="label label-primary">
+          %if userinfo['area'] in [None, ""]:
+          暂无
+          %else:
+          {{userinfo['area']}}
+          %end
+    </span></td></tr>
+    <tr><td><span type="first">个人签名</span></td> 
+      <td id="words"><span type="second" class="label label-danger">
+          %if userinfo['words'] in [None, ""]:
+          签名不超过30个字
+          %else:
+          {{userinfo['words']}}
+          %end
+      </span></td>
+    </tr>
+  </table>
+  
+  <div class="quitblock">
+    <hr />
+    <a class="btn btn-danger quitaccount" href="/sports/personalinfo/quitaccount">退出登录</a>
+  </div>
+
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myUserInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="closebtn">关闭</span></button>
+        <button type="button" class="btn btn-success"><span class="savebtn">保存</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="/static/js/basicinfo.js"></script>
+%include("sports_qrcode.tpl")

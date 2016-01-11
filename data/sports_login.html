@@ -1,0 +1,124 @@
+%rebase('base.tpl', title="用户登录")
+<style type="text/css" media="screen">
+  form{
+      margin-top:40%;
+    text-align: center;
+    width:80%;
+    margin:0 auto;
+  }
+
+  .input-group{
+    font-size:3em;
+    margin-bottom: 1em;
+  }
+
+  h1{
+    margin-bottom: 2em;
+    font-size: 3em;
+  }
+  .input-group input{
+    height:5em;
+  }
+
+.input-group-addon span{
+  font-size:4em;
+  }
+  #login{
+    margin-top: 2em;
+    font-size: 3em;
+    width:60%;
+  }
+
+  .loginlink{
+     margin-top: 1em;
+     font-size:xx-large;
+     text-align: center;
+  }
+  
+  .cbody{
+   text-align:center;
+   margin-top:40%;
+  }
+</style>
+
+<div class="cbody">
+  
+
+<h1>用户登录</h1>
+<form>
+  <div class="input-group">
+    <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
+    <input type="text" class="form-control" id="username" maxlength="10" placeholder="请输入用户名 (2-10位汉字、英文字母、数字、符号的组合)">
+  </div>
+  <div class="input-group">
+    <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></div>
+    <input type="password" class="form-control" id="password" maxlength="10" placeholder="请输入密码 (6-10位英文字母或数字)">
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm-4">
+      <a href="/sports/register" id="register" class="loginlink">注册帐号</a> 
+    </div>
+    <div class="col-sm-4">
+      
+    </div>
+    <div class="col-sm-4">
+      <a href="" id="forgetpwd" class="loginlink">忘记密码</a>      
+    </div>
+  </div>
+
+<p><a href="" id="login" class="btn btn-default">登录</a></p> 
+
+</form>
+</div>
+
+<p class="alertinfo">
+  <div class="alert alert-info" role="alert" style="display:none">
+  </div>
+</p>
+
+<script type="text/javascript">
+  $("#forgetpwd").click(function(){
+      var user = $("#username").val();
+      window.location.href = "/sports/forgetpwd?user="+user;
+      return false;
+  })
+  function cleanalert(){
+     $(".alert").empty();
+     $(".alert").hide();
+  }
+  $("#login").click(function(){
+    $(".alert").empty();
+
+    var containSpecial = /[(\ )]/;
+    var passwordcheck = /^[0-9a-zA-Z]*$/g;
+
+    var username = $("#username").val();
+    var password = $("#password").val();
+
+    if(username == "" || password == "" || checkcode==""){
+        $(".alert").append("<strong>警告！</strong>用户名、密码中有没有填写的内容！");
+      $(".alert").show();
+      setTimeout("cleanalert()", 5000);
+
+      return false;
+    }
+
+    $.post("/checksigininfoconfirm", {code:"", user:username, pwd:password}, function(data){
+            if(data != "0"){
+                  #need to reload check code
+                if(data == "-1"){
+                      $(".alert").append("<strong>警告！</strong>用户名已存在！");
+                }
+                else{
+                    $(".alert").append("<strong>警告！</strong>登陆系统错误！");
+                }
+                $(".alert").show();
+                setTimeout("cleanalert()", 3000);
+            }else{// return to home page
+                window.location.href="/sports";
+            }
+       })
+})
+</script>

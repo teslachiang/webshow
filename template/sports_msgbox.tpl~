@@ -1,0 +1,6 @@
+<div class="sports_msgbox" style="display:none">
+  <div class="alert alert-danger removemsgbox">
+    <p>您确定要删除<span class="removeditem"></span>项目？</p>
+    <p><a class="btn btn-danger" id="alertremoved">确定</a> <a class="btn btn-warning" id="alertcancel">取消</a></p>
+  </div>
+</div>

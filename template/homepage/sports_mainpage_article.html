@@ -1,0 +1,149 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+  <meta name="viewport" content="user-scalable=no" />  
+  <head>
+    <title>{{artobj['title']}}</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="/static/bt/css/bootstrap.min.css">
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="/static/bt/css/bootstrap-theme.min.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="/static/bt/js/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="/static/bt/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/css/sports_publicdefine.css" type="text/css" media="screen" />
+
+    <style type="text/css" media="screen">
+      body{
+      padding-bottom: 10em;
+      } 
+      .titlewell .glyphicon-user{
+      float:left;
+      }
+      
+      .art_info .row{
+        font-size:2.5em;
+      }
+      .timestamp{
+       float: right;
+      }
+      
+      .art_content{
+        font-size:1.2em;
+      }
+
+      .articlefooter{
+      position: fixed;
+      bottom: -20px;
+      width: 100%;
+      display: block;
+      font-size: 4em;
+      }
+
+      .articlefooter a{
+      font-size: 1em;
+      border-radius: 40px;
+      width: 80%;
+      color: #C85252;
+      }
+
+      .btn-default:hover{
+        color:  #C85252;
+      }
+
+      #myAritcleModal .modal-dialog{
+        width:90%;
+        margin-top: 10%;
+      }
+      #myAritcleModal .modal-header h4{
+        font-size:3.2em;
+        color: gray;
+      }
+
+      #myAritcleModal .modal-body textarea{
+         resize:none;
+         outline: none;
+         width:100%;
+         height:320px;
+         font-size: 30px;
+         border: 2px solid gray;
+      }
+
+      #myAritcleModal .modal-footer button:first-child{
+        float:left;
+      }
+
+    </style>
+
+  </head>
+  <body>
+    <div class="well well-lg titlewell">
+      <span class="glyphicon glyphicon-arrow-left" onclick="javascript:history.back(-1)"></span>
+      <span class="title">文章阅读</span>
+      %if username is None:
+      <span class="glyphicon glyphicon-user" onClick="javascript:window.location.href='/sports/login'"></span>
+      %else:
+      %include("sports_userheadshortcut.tpl", imagelink="/static/caoren.jpg")
+      %end
+    </div>
+    <div class="removewellgapblock"></div>
+    <div class="container">
+      <div class="art_title">
+        <h1>{{artobj['title']}}</h1>
+      </div>
+      <div class="art_info">
+        <div class="row">
+          <div class="col-xs-6">
+            板块：<span class="label label-primary">{{artobj['block']}}</span>
+          </div>
+          <div class="col-xs-6">
+            <span class="timestamp">{{artobj['timestamp'][2:-3]}}</span>
+          </div>
+        </div>
+        
+      </div>
+      <hr />
+
+      <div class="art_content">
+        {{!artobj['content']}}        
+      </div>
+    </div>
+
+    <div class="articlefooter">
+      <div class="well">
+        <div class="row">
+          <div class="col-xs-6">
+            <a class="btn btn-default writecomment"><span class="glyphicon glyphicon-pencil"></span>写评论...</a>    
+          </div>
+          <div class="col-xs-6">
+            <a class="btn btn-default addtofavor"><span class="glyphicon glyphicon-heart"></span>收藏</a>            
+          </div>
+        </div>
+        
+
+      </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myAritcleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-pencil"></span>写评论</h4>
+          </div>
+          <div class="modal-body">
+            <textarea name="comment" id="articlecomment" rows="5" cols="" onfocus="readytoinputcomment()" tabindex="0"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary releasecomment">发布</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="/static/js/homepage/articleview.js"></script>
+    
+  </body>
+</html>

@@ -1,0 +1,290 @@
+.container{
+    width:100%;
+}
+body{
+    background-image: url(/static/img/background-color.jpg);
+}
+.well{
+    text-align: center;
+}
+.title{
+    font-size:5em;   
+    font-family: -webkit-pictograph;
+    text-shadow: 1px 2px 2px gray;
+}
+.itemlistpageuserinfowell{
+    box-shadow: 5px 5px 9px #4F4C4C;
+}
+
+.itemlistpageuserinfoalert{
+    box-shadow: 5px 5px 10px #4F4C4C;
+    border-radius: 25px;
+}
+.usershortcut{
+    width:200px;
+    border-radius:50%;
+    float: left;
+}
+.username{
+    font-size:4em;
+}
+
+.messageinfo{
+    font-size:2.5em;
+}
+
+.ongoinglabel, .closedlabel, .ownerlabel{
+    font-size: 2.3em;
+    margin-left: 1em;
+}
+.ongoinglabel{
+    margin-left:1em;
+}
+.ownerlabel{
+    margin-right: 0;
+}
+
+.taskicon{
+    font-size: 4em;
+    padding-top: 15px;
+}
+
+.alertlistprovidesubject{
+  margin: 20px 5% auto 5%;
+}
+
+.alertlistprovidesubject h1{
+    font-size:4em;
+}
+.providesubject_studenticon{
+    float: right;
+    margin-top:20px;
+    font-size: 3em;
+    color: #4D70A7;
+}
+
+.providesubject_studenticon .badge{
+    background-color: #D9534F;
+    font-size: 30px;
+    margin-top: -30px;
+    margin-left: 10px;
+}
+
+.form-group input[type=text]{
+    height: 80px;
+    font-size: 30px;
+}
+.form-group{
+    margin-bottom: 50px;
+}
+
+.input-group-btn button{
+    height:80px;
+    font-size:40px;
+}
+
+.form-group label{
+    font-size:3em;
+}
+
+.input-group-addon{
+    font-size:4em;
+}
+
+.joingame{
+    margin-top: 4em;
+    text-align: center;
+}
+.joingame a{
+    font-size: 4em;
+    width: 50%;
+}
+
+#mySocialModal{
+    font-size:16px;
+}
+
+.modal-footer button{
+    font-size: 3em;
+    width: 7em;
+}
+
+#addressinfo .input-group input{
+    font-size: 40px;
+    height: 88px;
+}
+#addressinfo .input-group span button{
+    font-size: 40px;
+    height:88px;
+    width: 202px;
+}
+.msginfo{
+    color:red;
+    font-size: 0.5em;
+    padding-left: .8em;
+}
+
+.emptyinfo{
+    text-align: center;
+    width: 80%;
+    margin-left:10%;
+    font-size: 3em;
+}
+
+.titleicon{
+    font-size: 5em;
+    padding-top: 0.25em;
+    text-shadow: 1px 3px 3px gray;   
+}
+
+.titleicon:first-child{
+    float: left;
+}
+.titleicon:last-child{
+    float: right;
+}
+
+.titlewell span[class^=glyphicon]{
+    font-size: 5em;
+    padding-top: 0.25em;
+}
+.titlewell span[class^=glyphicon]:first-child{
+    float:left;
+}
+.titlewell span[class^=glyphicon]:nth-child(2){
+    float:right;
+}
+.titlewell span[class^=glyphicon]:last-child{
+    float:right;
+}
+
+.removemsgbox{
+    z-index: 9999;
+    position: fixed;
+    width: 96%;
+    margin-left: 2%;
+    font-size: 3.5em;
+    text-align: center;
+    top:35%;
+    height:15%;
+  }
+  .removemsgbox .help-block{
+    font-size: 0.7em;
+  }
+  .removemsgbox a{
+    font-size: 1em;
+    width: 4em;
+    margin-top:1em;
+  }
+  .removemsgbox a:first-child{
+    margin-right: 2em;
+  }
+ .searchinputgroup input{
+  height: 100px;
+  font-size: 40px;
+  }
+
+
+.mailalertinfo .col-xs-4 p{
+    font-size: 25px;
+    text-align: left;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.mailtitle{
+    display:block;
+    white-space:nowrap; 
+    overflow:hidden; 
+    text-overflow:ellipsis;
+    font-size:45px;
+}
+
+/* =========sign block========== */
+.usersign_cbody form{
+    margin-top:40%;
+    text-align: center;
+    width:85%;
+    margin:0 auto;
+}
+
+.usersign_cbody .input-group{
+    font-size:3em;
+    margin-bottom: 1em;
+}
+
+.usersign_cbody .input-group input{
+    height: 125px;
+    font-size: 40px;
+}
+
+.usersign_cbody .input-group-addon span{
+    font-size:70px;
+    color: #4C8FCD;
+}
+.usersign_cbody{
+    text-align:center;
+    margin-top:30%;
+}
+
+.usersign_alertinfo .alert{
+    width: 80%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 4em;
+    font-size: large;
+}
+
+.usersign_cbody #registersign, #getpassword, #loginsign{
+    margin-top: 2em;
+    font-size: 5em;
+    width:70%;
+}
+.usersign_cbody #checkcode{
+    width:35%;
+}
+
+.usersign_cbody .checkcodeimgblock{
+    width: 53%;
+    float: right;
+    margin-top:-166px;
+}
+.usersign_cbody .checkcodeimg{
+    width:80%;
+}
+
+.usersign_cbody .guiderwords{
+    font-size: 30px;
+    color: #5D1D1D;
+    font-weight: bold;
+}
+
+.usersign_cbody .guiderwords img{
+    width: 30px;
+    margin-top: -15px;
+}
+
+.usersign_cbody .row{
+    margin-top:100px;
+}
+
+.loginlink{
+    font-size: 4em;
+    text-align: center;
+    background-color:darkgreen;
+}
+
+.usersign_cbody #forgetpwd{
+    background-color:firebrick;
+}
+
+.usersign_alertinfo{
+    font-size: 45px;
+    text-align: center;
+    width: 80%;
+    margin-left: 10%;
+    position: fixed;
+    top: 15%;
+    border-radius: 60px;
+}

@@ -1,0 +1,30 @@
+function dropdownmenu(thisobj){
+
+     if($(".dropdown-menu").is(":hidden") == false){
+        $(".dropdown-menu").hide();
+     }else{
+        $(".dropdown-menu").show();
+     }
+     if(thisobj.find("ul").length >  0){
+        return;
+     }
+     var menu = '<ul class="dropdown-menu">\
+    <li><a href="#" onclick="dropsubmenuclick($(this))"><span class="glyphicon glyphicon-edit"></span><span class="dropmenustext" name="edit">编辑</span></a></li>\
+    <li><a href="#" onclick="dropsubmenuclick($(this))"><span class="glyphicon glyphicon-ban-circle"></span><span class="dropmenustext" name="close">关闭</span></a></li>\
+    <li><a href="#" onclick="dropsubmenuclick($(this))"><span class="glyphicon glyphicon-trash"></span><span class="dropmenustext" name="delete">删除</span></a></li></ul>';
+
+    thisobj.append(menu);
+
+    $(".dropdown-menu").show();
+  }
+
+  function dropsubmenuclick(thisobj){
+    $(".dropdown-menu").hide();
+
+    var name = thisobj.find(".dropmenustext").attr("name");
+    if(name == "edit"){
+    }else if(name == "close"){
+    }else if(name == "delete"){
+  
+    }
+  }

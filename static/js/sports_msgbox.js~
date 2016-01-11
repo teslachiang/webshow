@@ -1,0 +1,8 @@
+function SportsBaseMsgBox(){}
+
+SportsBaseMsgBox.prototype = {
+    ok: function(){},
+    cancel: function(){},
+    getCotent: function(){},
+    setCotent: function(){}
+};

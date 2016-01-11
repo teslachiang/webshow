@@ -1,0 +1,86 @@
+%include("sports_pagebase.tpl", title="科目教授")
+
+<style type="text/css" media="screen">
+  .providedsubject{
+    font-weight: bold;
+    color: #2180C0;
+  }
+  .subjectcontent p,b{
+    font-size:35px;
+  }
+  
+  ul.dropdown-menu{
+    display: block;
+    margin-left: -250px;
+    width: 320px;
+    background-color: #efefef;
+  }
+  ul.dropdown-menu li {
+    font-size: 50px;
+    width: 100%;
+    border: 1px solid #ddd;
+    height: 2em;
+    text-shadow: none;
+ }
+ul.dropdown-menu li a span:first-child{
+    font-size: 55px;
+}
+ul.dropdown-menu li .dropmenustext{
+     margin-left: 25px;
+    margin-top: -2px;
+    position: absolute;
+}
+</style>
+<div class="container">
+<div class="well">
+  <div class="row">
+    <div class="col-xs-2">
+      <img src="/static/caoren.jpg" class="usershortcut" alt="" />
+    </div>
+    <div class="col-xs-10">
+        <p class="username">{{nickname}}</p><span class="usernamehide" style="display:none">{{username}}</span>
+        <p class="messageinfo">您教授的<span class="providedsubject">{{subject}}</span>科目状态为：</p>
+        <span class="label label-info closedlabel">{{len(students)}}个学员</span>
+        <span class="label label-warning closedlabel">{{comments}} 条评论</span>
+        %if isclosed:
+        <span class="label label-danger closedlabel">已关闭</span>
+        %else:
+        <span class="label label-success closedlabel">已激活</span>
+        %end
+        <span class="subjectisclosed" style="display:none">{{isclosed}}</span>
+    </div>
+  </div>
+</div>
+
+<hr />
+
+<div class="alert alert-danger removemsgbox" style="display:none">
+  <p>您确定要删除这个科目么？</p>
+  <p class="help-block">(删除后如想再次创建该项目需要联系管理员)</p>
+  <p><a class="btn btn-danger">确定</a> <a class="btn btn-warning">取消</a></p>
+</div>
+
+<div class="subjectcontent">
+{{!subjectcontent}}
+</div>
+
+<script type="text/javascript">
+  $(function(){
+     $(".titlewell .title").text("科目详情");
+
+     var html = '<span class="glyphicon glyphicon-cog titleicon" onclick="dropdownmenu($(this))"></span>';
+     %if owner is True:
+     $(".titlewell").prepend('<span class="glyphicon glyphicon-arrow-left titleicon" onclick="location=\'/sports/personalsocial/userprovidesubject?username={{username}}\'"></span>');
+     $(".titlewell").append(html);
+     %else:
+     // normal user access, it will give focus and ...
+     $(".titlewell").prepend('<span class="glyphicon glyphicon-arrow-left titleback"\
+                            onClick="javascript :history.back(-1);" style="font-size:5em; float:left; padding-top:0.25em"></span>');
+     %end
+
+     $(".dropdown-menu").hide();
+  })
+</script>
+
+<script type="text/javascript" src="/static/js/sports_social/subjectdetail.js"></script>
+

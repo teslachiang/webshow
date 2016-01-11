@@ -1,0 +1,100 @@
+#demo_box{
+    width: 100%;
+    height:100%;
+    z-index:99999;
+    position: fixed;
+    top: 0%;
+    background-color: rgba(25,22,22,0.72);
+}
+#demo_box ul{
+    margin-top:20%;
+}
+
+
+.demo_li{
+    float: left;
+    list-style: none;
+    width: 29%;
+    text-align: center;
+    height: 11%;
+    background-color: #B97B14;
+    border: 2px solid #7B7777;
+    padding: 10% 2% 15% 2%;
+    margin: 22px 28px 4px 6px;
+    border-radius: 30px;
+    box-shadow: 3px 3px 10px #878484;
+    font-size: 52px;
+    font-weight: bold;
+    /* text-shadow: 1px 3px 2px black; */
+    color: #EFEAEA;
+}
+
+.demo_li:hover{
+    background-color: #6B4027;
+}
+.fa{
+    font-size: 40px;
+    line-height: 70px;
+}
+.fa-bars{
+    color: #3498db;
+}
+pre{
+    font-family: Consolas,Liberation Mono,Courier,monospace;
+    font-size: 13px;
+}
+@media screen and (orientation: portrait){
+    pre{
+        overflow-x: scroll;
+    }
+}
+
+.subselect{
+    display:none;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.72) none repeat scroll 0 0 !important;
+    
+    width: 100%;
+    height: 100%;
+    top:0%;
+    z-index:9999999;
+    padding: 20% 5% 30% 5%;
+}
+.subitem{
+    float: left;
+    list-style: none;
+    width: 30%;
+    height: 20%;
+    background-color: yellowgreen;
+    margin: 9px;
+    border-radius: 35px;
+    font-size: 50px;
+    font-weight: bold;
+    padding: 10% 0 0 0%;
+    box-shadow: 3px 5px 5px gray;
+    text-align: center;
+}
+.subitem:hover{
+    // background-color: #ff2211;
+}
+.subbutton{
+    margin-bottom: 10%;
+}
+.subbutton button{
+    font-size:60px;
+    margin-left:5%;
+    color: white;
+    border-radius:19px;
+    box-shadow:1px 1px 5px #aaa;
+    width: 25%;
+    height: 8%;
+    border:0;
+}
+.subbutton button:first-child{
+    margin-right:20%;
+    background-color: darkorange;
+}
+.subbutton button:last-child{
+    background-color: green;
+    margin-left:20%;
+}

@@ -1,0 +1,112 @@
+%include('sports_personalmail.tpl', title="私信箱-阅读")
+
+<style type="text/css" media="screen">
+  .mailoperation{
+   // position: fixed;
+   // z-index:2;
+   // overflow:hidden;
+   // top:8%;
+  }
+  .mailoperation a{
+      font-size:3em;
+  }
+  .table tr{
+  font-size:2em;
+  }
+  .table tr td[role=headflag]{
+     width:15%;
+  }
+</style>
+
+<div class="contianer">
+
+<div class="btn-group btn-group-justified mailoperation" role="group" aria-label="">
+  <div class="btn-group" role="group">
+    <a class="btn btn-success" href="/sports/personalmail/reply?type=0&mailid=id" id="replymaill">回复</a>
+  </div>
+  <div class="btn-group" role="group">
+    <a class="btn btn-info" href="/sports/personalmail/reply?type=1&mailid=id" id="replytoall">回复全部</a>
+  </div>
+  <div class="btn-group" role="group">
+    <a class="btn btn-primary" href="/sports/personalmail/reply?type=-1&mailid=id" id="forwardmail">转发</a>
+  </div>
+  <div class="btn-group" role="group">
+    <a class="btn btn-danger" data-toggle="modal" data-target="#myModal">删除</a>
+  </div>
+</div>
+
+<hr />
+  
+  <table class="table">
+    <tr>
+      <td role="headflag">标题</td>
+      <td>肯尼亚41岁老将基普楚姆巴获得了2015北京国际马拉松赛(下称“北马”)的冠军</td>
+    </tr>
+    <tr>
+      <td role="headflag">发件人</td>
+      <td><a>sobob</a></td>
+    </tr>
+    <tr>
+      <td role="headflag">收件人</td>
+      <td><a>生萝卜条</a></td>
+    </tr>
+    <tr>
+      <td role="headflag">日期</td>
+      <td>2015-7-8</td>
+    </tr>
+  </table>
+<hr />
+
+  <div class="mailcontent">
+<preview>
+    马拉松经纪人陶绍明心情不错，上个周末，三场马拉松比赛中，自己带的选手都获得了好成绩。其中，肯尼亚41岁老将基普楚姆巴获得了2015北京国际马拉松赛(下称“北马”)的冠军。
+
+　　基普楚姆巴不仅获得了几万美元奖金，也引起了一些企业关注。“现在都在接洽中，我相信他未来商业代言的收入会远高于比赛奖金的收入。”陶绍明近日在接受《第一财经日报》记者采访时表示，目前他的经纪人公司“生存已不是问题”。
+
+　　除了基普楚姆巴，目前与陶绍明签约的选手有300多位，有近百人是今年刚签的，包括马拉松、短跑等田径项目。10月份，陶绍明将率弟子去美国参加一场马拉松赛，上海国际马拉松赛(下称“上马”)或是他们在国内的下一个目标。
+
+　　与陶绍明签约选手一同“井喷”的还有今年的各类跑步赛事。公开数据显示，今年1~6月份，国内累计组织各类跑步赛事302场，参赛和完赛人次同比增长超过100%。业界的另一种估算是，今年注册与备案的各类跑步赛事总数将达近2000场。
+
+　　“虽然相较于美国每年2万场的跑步市场，中国的数量不是很惊人，但增速很快，未来几年还会有一个爆发式增长。”北京斯迈夫体育总裁袁方对本报记者表示。
+
+　　“马拉松热，一方面是这项运动本身的发展到了这个阶段，另外简政放权的改革则是一大促进。”同是马拉松爱好者的《篮球报》主编谭杰在接受本报记者采访时表示。
+
+　　今年开始，根据《体育总局关于推进体育赛事审批制度改革的若干意见》(下称《意见》)，中国田协全面取消了马拉松赛事的审批，并以简政放权的形式促进马拉松及相关运动在中国的普及开展。
+
+　　万米高手跑几场赚十几万美元
+
+　　对于体育产业的发展，陶绍明在2011年就有“预感”。
+
+　　2011年之前，陶绍明的一个重要身份是中国国家队女子长跑教练。值得一提的是，从2006年11月开始，其成为中国女子中长跑项目当家花旦之一孙英杰“复出”之路上的重要人物。到2009年年底，随着孙英杰的退役，陶绍明的国家队教练员的职业生涯告一段落。
+
+　　一个更为现实的问题是女子万米项目中，近年来数届田径世锦赛，中国运动员的出席率几乎都为零。2007年至今的世锦赛和奥运会，中国仅派选手参加了北京奥运会和2009年田径世锦赛，无人跻身前15名，王军霞俨然成为一个时代的记忆。
+</preview>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">提示</h4>
+      </div>
+      <div class="modal-body">
+        <p>确定要删除该邮件？</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $(function(){
+     $(".title").text("查看邮件");
+  })
+</script>
+
+%include('sports_footer.tpl')

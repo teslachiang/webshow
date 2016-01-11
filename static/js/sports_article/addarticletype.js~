@@ -1,0 +1,63 @@
+
+function operationremove(jqobj){  
+    // close project
+    var closeitem = jqobj.parent().parents('.row').find('h1').text();
+    
+    $(".removemsgbox .removeditem").text(closeitem);
+    $(".removemsgbox").show();
+    
+}
+
+function addarticleselector(){
+    $("#demo_box").show();
+}
+
+
+$("#alertcancel").click(function(){
+    $(".removemsgbox").hide();
+});
+
+$("#alertremoved").click(function(){
+    $(".removemsgbox").hide();
+
+    $(".alert").each(function(){
+        if($(this).find('.col-xs-4 h1').text() == $(".removemsgbox .removeditem").text()){
+            $(this).remove();
+            return;
+        }
+    });
+});
+
+$(function(){
+    $(".titlewell .title").text("文章定制");
+    $(".titlewell").prepend('<span class="glyphicon glyphicon-arrow-left" onClick="javascript:history.back(-1)"></span>');
+    $(".titlewell").append('<span class="glyphicon glyphicon-plus" onclick="addarticleselector()"></span>');
+
+    var operation = '<button type="button" class="btn btn-warning operationbutton" data-toggle="button" aria-pressed="false" autocomplete="off">开启</button><button type="button" class="btn btn-danger operationremove" onclick="operationremove($(this))">删除</button>';
+
+    //var operation = '<div class="btn-group" data-toggle="buttons">\
+    //    <label class="btn btn-success"><input type="radio" name="options" id="option_run" autocomplete="off">运行中</label>\
+    //    <label class="btn btn-warning"><input type="radio" name="options" id="option_close" autocomplete="off">关闭</label>\
+    //    <label class="btn btn-danger"><input type="radio" name="options" id="option_remove" autocomplete="off">删除</label>\
+    //    </div>';
+
+    $(".alert .row .col-xs-6").append(operation);
+
+    $(".operationbutton").on('click', function(){
+        var classname = $(this).attr("attr");
+        var aria_pressed = $(this).attr("aria-pressed");
+        
+        if(aria_pressed == "false"){
+            $(this).text("关闭");
+            $(this).removeClass("btn-warning");
+            $(this).addClass("btn-success");
+        }else{
+            $(this).text("开启");
+            $(this).removeClass("btn-success");
+            $(this).addClass("btn-warning");
+        }
+        
+        return;
+    });
+})
+

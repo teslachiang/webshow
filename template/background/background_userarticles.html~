@@ -1,0 +1,33 @@
+%include("background.tpl", title="user records")
+
+<div class="alert alert-info">
+  您目前发布的文章数为: <span class="badge">{{len(articles)}}</span> 
+</div>
+<table class="table">
+  <tr>
+    <td>#</td>
+    <td style="width:60%">Title</td>
+    <td>Date</td>
+    <td>Operation</td>
+  </tr>
+  %for i, val in enumerate(articles):
+<tr>
+    <td>{{i+1}}</td>
+    <td><a href="/sports/background/checkarticle?artid={{val['id']}}&email={{email}}&password={{password}}">{{val['title']}}</a></td>
+    <td>{{val['time']}}</td>
+    <td>
+      <a href="/sports/background/modifyarticle?artid={{val['id']}}&email={{email}}&password={{password}}" class="btn btn-success">修改文章</a> 
+      <a href="#" id="removearticle" class="btn btn-danger">删除文章</a>
+    </td>
+</tr>
+  %end
+</table>
+
+<script type="text/javascript">
+  $("#removearticle").click(function(){
+      $.post("/sports/background/removearticle", {email:"{{email}}", password:"{{password}}", artid:"{{val['id']}}"}, function(data){
+  
+      }, "json");
+      return false;
+  })
+</script>

@@ -1,0 +1,19 @@
+# =========coding:utf8=========
+import xlrd
+import json
+
+def main():
+    """
+    """
+    xlsfile = "/home/CORPUSERS/28851011/Downloads/tmail11.xlsx"
+    xlsdata = xlrd.open_workbook(xlsfile)
+    retobj = {}
+    for sheet in xlsdata.sheets():
+        retobj[sheet.name] = []
+        for i, row in enumerate(sheet.get_rows()):
+            if i != 0:
+                retobj[sheet.name].append( (row[0].value, row[1].value, row[2].value, row[3].value, row[4].value))
+    print json.dump(retobj, open("tmall11.json", 'wb'), indent=2)
+
+if __name__ == '__main__':
+    main()

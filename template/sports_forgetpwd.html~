@@ -1,0 +1,111 @@
+%rebase('base.tpl', title="找回密码")
+
+<style type="text/css" media="screen">
+  form{
+      margin-top:40%;
+    text-align: center;
+    width:80%;
+    margin:0 auto;
+  }
+
+  .input-group{
+    font-size:3em;
+    margin-bottom: 1em;
+  }
+
+  h1{
+    margin-bottom: 2em;
+    font-size: 3em;
+  }
+  .input-group input{
+    height:5em;
+  }
+
+.input-group-addon span{
+  font-size:4em;
+  }
+  #getpassword{
+    margin-top: 2em;
+    font-size: 3em;
+    width:60%;
+  }
+
+  #checkword{
+  margin-top: 0.25em;
+    position: absolute;
+    width: 7em;
+    margin-left: -4em;
+  }
+
+
+  .cbody{
+   text-align:center;
+   margin-top:40%;
+  }
+
+.alert{
+     width: 80%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 4em;
+    font-size: large;
+  }
+</style>
+
+<div class="cbody">
+  
+
+<h1>找回密码</h1>
+<form>
+  <div class="input-group">
+    <div class="input-group-addon"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span></div>
+    <input type="text" class="form-control" maxlength="11" id="phonenumber" placeholder="输入您帐号绑定的手机号码">
+    <input type="text" id="username" style="display:none">
+  </div>
+ 
+<p><a href="@" id="getpassword" class="btn btn-default">短信获取密码</a></p> 
+
+</form>
+</div>
+
+<p class="alertinfo">
+  <div class="alert alert-info" role="alert" style="display:none">
+  </div>
+</p>
+
+<script type="text/javascript">
+  function cleanalert(){
+     $(".alert").empty();
+     $(".alert").hide();
+  }
+  $("#getpassword").click(function(){
+    $(".alert").empty();
+
+    var phonenumbercheck = /^(((13[0-9]{1})|159|153)+\d{8})$/;;
+    var phonenumber = $("#phonenumber").val();
+    var username = $("#username").val();
+    if(phonenumbercheck.test(phonenumber) == false){
+         $(".alert").append("<strong>警告！</strong>电话号码错误！");
+       $(".alert").show();
+       setTimeout("cleanalert()", 3000);
+       return false;
+    }else{
+       $.post("/checkuserphonenumber", {user:username}, function(data){
+             if(data != "0"){
+                   if(data == "-1"){
+                      $(".alert").append("<strong>警告！</strong>未找到用户名");
+                 }else{
+                    $(".alert").append("<strong>警告！</strong>电话号码尚未注册");
+                 }
+                 $(".alert").show();
+                 setTimeout("cleanalert()", 3000);
+                 return false;
+           }else{
+                window.location.href="/sports";
+           }
+      });
+    }
+
+  })
+
+</script>

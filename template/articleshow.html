@@ -1,0 +1,11 @@
+%rebase('base.tpl')
+
+<div class="container">
+%if htmlcontent.get('html') is not None:
+  {{!htmlcontent['html']}}
+%else:
+<p>Content parse error!, please check the original link.</p>
+%end
+</div>
+<hr />
+<p><a href="{{htmlcontent['href']}}" target="_blank">原文链接</a></p>

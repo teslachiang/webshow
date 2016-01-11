@@ -1,0 +1,94 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="utf8">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title>SOBOB {{title or ""}}</title>
+
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<style type="text/css" media="screen">
+  .footer{
+   text-align: center;
+   font-size: large;
+   font-weight: bold;
+   position:fixed;
+   bottom:5em;
+   left:0; width:100%;
+}
+
+  .container{
+      width:100%;
+  }
+
+  .well{
+      text-align: center;
+   }
+  .title{
+      font-size:5em;   
+      font-family: -webkit-pictograph;
+      text-shadow: 1px 2px 2px gray;
+  }
+      
+form{
+    margin-top:40%;
+    text-align: center;
+    width:85%;
+    margin:0 auto;
+  }
+
+  .input-group{
+    font-size:3em;
+    margin-bottom: 1em;
+  }
+
+  .input-group input{
+    height: 154px;
+    font-size: 50px;
+  }
+
+.input-group-addon span{
+  font-size:6em;
+  }
+.cbody{
+   text-align:center;
+   margin-top:30%;
+  }
+.alert{
+     width: 80%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 4em;
+    font-size: large;
+  }
+
+.loginlink{
+     margin-top: 1em;
+     font-size: 4em;
+     text-align: center;
+  }
+</style>
+  </head>
+  <body>
+    <div class="well well-lg">
+      <span class="title">{{title}}</span>
+    </div>
+    <div class="container">
+      {{!include}}
+    </div>
+    
+    <!-- <hr /> -->
+
+    <!-- <div class="footer"> -->
+    <!--   <p><i>SOBOB 技术公司提供</i></p> -->
+    <!-- </div> -->
+  </body>
+</html>

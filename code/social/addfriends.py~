@@ -1,0 +1,11 @@
+@route("/sports/personalsocial/addnewfriend")
+def personalsocial_addnewfriend():
+    return template("addnewfriend")
+
+
+@route("/sports/personalsocial/friendlist")
+def personalsocial_friendlist():
+    """
+    """
+    return template("sports_personalsocial_friendlist")
+

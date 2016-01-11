@@ -1,0 +1,64 @@
+%include("sports_pagebase.tpl", title="科目教授")
+
+<style type="text/css" media="screen">
+  .isclosed{
+    font-size: 2.6em;
+    color: #C85252;
+    margin-top: 0.5em;
+  }
+</style>
+
+<div class="container">
+<div class="well">
+  <div class="row">
+    <div class="col-xs-2">
+      <img src="/static/caoren.jpg" class="usershortcut" alt="" />
+    </div>
+    <div class="col-xs-10">
+        <p class="username">{{nickname}}</p><span class="usernamehide" style="display:none">{{username}}</span>
+        <p class="messageinfo">您所教授的科目状态为：</p>
+        <span class="label label-success ongoinglabel">{{len(subjectlist)}}个科目</span> 
+        <span class="label label-danger closedlabel">{{students}}个学员</span>
+    </div>
+  </div>
+</div>
+
+<hr />
+%if len(subjectlist) == 0:
+<p class="emptyinfo">您还没有创建科目教授</p>
+%else:
+%for subject, member, isclosed in subjectlist:
+<div class="well alertlistprovidesubject" onclick="checksubjectdetail($(this))">
+  <div class="row">
+    <div class="col-xs-2">
+      <span class="glyphicon glyphicon-th-large taskicon"></span>
+    </div>
+    <div class="col-xs-4">
+      <h1 class="titletext">{{subject}}</h1>
+    </div>
+    <div class="col-xs-3">
+     %if isclosed:
+     <div class="isclosed">(关闭中)</div> 
+     %end
+    </div>
+    <div class="col-xs-3">
+     <span class="glyphicon glyphicon-user providesubject_studenticon"><span class="badge">{{member}}</span></span>
+    </div>
+  </div>
+</div>
+%end
+%end
+</div>
+
+<script type="text/javascript">
+  $(function(){
+    $(".titlewell").prepend('<span class="glyphicon glyphicon-arrow-left titleback" onClick="location=\'/sports/personalsocial\'"></span>');
+    $(".titlewell").append('<span class="glyphicon glyphicon-plus titleaddgame" onclick="location=\'/sports/personalsocial/addprovidesubject\'"></span>');
+  })
+
+  function checksubjectdetail(qobj){
+      var $itemobj = qobj;
+      var block = $itemobj.find(".titletext").text();
+      window.location.href="/sports/personalsocial/checksubjectdetail?user={{username}}&subject="+block;
+  }
+</script>

@@ -1,0 +1,178 @@
+# ============== coding:utf8 ===============
+from publicdefine import *
+
+
+class UserDBProcessModule(object):
+    """
+    """
+
+    def __init__(self, ):
+        """
+        """
+        redispool = redis.ConnectionPool(host='localhost',
+                                           port=6380,
+                                           db=0,
+                                           password='jianglei0711')
+        redis_server = redis.Redis(connection_pool=redispool)
+        self.redis_server = redis_server
+        self.redis_pipe = self.redis_server.pipeline()
+
+    def addcitylisttodb(self, cityobj):
+        """
+        """
+        return self.redis_server.set("sports:citylist", ujson.dumps(cityobj))
+
+    def checkcityvaild(self, cityname):
+        """
+        """
+        if cityname is None:
+            return -1
+        jsonstr = self.redis_server.get("sports:citylist")
+        if jsonstr is None:
+            return -2
+        try:
+            city = ujson.loads(jsonstr)
+            
+            if cityname not in city['cities'].keys():
+                return -4
+            else:
+                return 0
+        except:
+            return -3
+
+    def querycityinfo(self, keywords):
+        """
+        """
+        if keywords is None:
+            return -1
+        jsonstr = self.redis_server.get("sports:citylist")
+        if jsonstr is None:
+            return -2
+        try:
+            city = ujson.loads(jsonstr)
+            return [(k, city['provice'][v]) for k, v in city['cities'].items() if k.find(keywords)>=0]
+        except:
+            traceback.print_exc()
+            return -3
+
+    def adduser2db(self, username, password):
+        """
+        """
+        if username is None or password is None:
+            return -1
+        elem = {'password': password, 'username': username}
+        try:
+            umd5 = md5value(username.decode('utf8'))
+            if self.redis_server.hget("sports:users", umd5) is not None:
+                return -3
+            else:
+                self.redis_pipe.hset("sports:users", umd5, ujson.dumps(elem))
+                self.redis_pipe.execute()
+        except Exception as e:
+                print e, traceback.print_exc()
+                return -2
+        return 0
+
+    def checkuserinvalid(self, username, password):
+        """
+        """
+        if username is None or password is None:
+            return -1
+        try:
+            elemstr = self.redis_server.hget("sports:users", md5value(username.decode('utf8')))
+            if elemstr is None:
+                return -2
+            if ujson.loads(elemstr)['password'] == password:
+                return 0
+            else:
+                return -3
+        except Exception as e:
+            print traceback.print_exc()
+            return -4
+
+    def dbgetuserinfo(self, regname=None, regmd5=None):
+        """
+        """
+        if regname is None and regmd5 is None:
+            return -1
+        try:
+            if regmd5 is None:
+                umd5 = md5value(regname.decode('utf8'))
+            else:
+                umd5 = regmd5
+            _tmpstr = self.redis_server.hget("sports:users", umd5)
+            if _tmpstr in [None, ""]:
+                return -2
+            return ujson.loads(_tmpstr)
+        except Exception as e:
+            return -3
+
+    def dbupdateuserinfo(self, newobj, regname=None,  md5id=None):
+        """
+        """
+        if newobj is None or type(newobj) != dict:
+            return -1
+        if md5id is None:
+            umd5 = md5value(regname.decode('utf8'))
+        else:
+            umd5 = md5id
+        _tmpstr = self.redis_server.hget("sports:users", umd5)
+
+        if _tmpstr in [None, ""]:
+            return -2
+        try:
+            elemobj = ujson.loads(_tmpstr)
+            if elemobj is None:
+                return -4
+            for k, val in newobj.items():
+                if val not in [None, ]:
+                    if k == 'contact' and type(val) == dict:
+                        if elemobj.get(k) is None:
+                            elemobj[k] = {}
+                        for _k, v in val.items():
+                            if v not in [None, ""]:
+                                elemobj[k][_k] = v
+                    else:
+                        elemobj[k] = val
+            self.redis_pipe.hset("sports:users", umd5, ujson.dumps(elemobj))
+            self.redis_pipe.execute()
+            return 0
+        except Exception as e:
+            print e
+            print traceback.print_exc()
+            return -3
+
+
+def main():
+    """
+    """
+    cityobj = ujson.load(open("city.json"))
+    province = []
+    cities = {}
+    for k, val in cityobj.items():
+        if k not in province:
+            province.append(k)
+    for k, val in cityobj.items():
+        i = province.index(k)
+        if val is None or len(val)==0:
+            print k
+            cities[k] = i
+        for v in val:
+            cities[v] = i
+    ret = {"provice": province, "cities": cities}
+    UDBP = UserDBProcessModule()
+    UDBP.addcitylisttodb(ret)
+    return
+    ujson.dump(ret, open("citylist.json", "wb"))
+    return
+    elem = {'username': '25422875@qq.com', 'nickname': '生萝卜条',
+            'regcode': md5value('25422875@qq.com'),
+            'sex': '男', 'words': '我爱北京天安门',
+            'contact': {'name': "江雷", "phonenumber": "18618307813", 'address': "广顺南大街16号索尼大厦"},
+            'area': '北京'
+            }
+    UDBP = UserDBProcessModule()
+    UDBP.dbupdateuserinfo(elem['username'], elem)
+
+if __name__ == '__main__':
+    main()

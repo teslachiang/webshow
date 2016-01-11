@@ -1,0 +1,46 @@
+%include("sports_pagebase.tpl", title="个人文章", footer="footerarticle")
+<link rel="stylesheet" href="/static/css/mypublic_mainpage.css" type="text/css" media="screen" />
+<style type="text/css" media="screen">
+   
+</style>
+
+<div class="container">
+
+  %include("sports_headblock.tpl", nickname=userinfo['nickname'], username=userinfo['username'], shortcut=userinfo['shortcut'], md5id=md5id)
+
+  <div class="well welllistitem">
+    <div class="row">
+       <div class="col-xs-2 welllisticon">
+         <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+       </div>
+       <div class="col-xs-8 welllisttitle">
+         <a href="/sports/personalsocial/schedule">我的文章</a>
+       </div>
+    </div>
+  </div>
+
+ <div class="well welllistitem">
+    <div class="row">
+       <div class="col-xs-2 welllisticon">
+         <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+       </div>
+       <div class="col-xs-8 welllisttitle">
+         <a href="/sports/personalsocial/schedule">文章收藏</a>
+       </div>
+    </div>
+  </div>
+
+ <div class="well welllistitem">
+    <div class="row">
+       <div class="col-xs-2 welllisticon">
+         <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+       </div>
+       <div class="col-xs-8 welllisttitle">
+         <a href="/sports/personalarticle/selectarticletype">运动关注</a>
+       </div>
+    </div>
+  </div>
+</div>
+
+
+

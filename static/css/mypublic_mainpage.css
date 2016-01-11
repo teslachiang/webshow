@@ -1,0 +1,74 @@
+.headblock .well .row .col-xs-4{
+    text-align: left;
+}
+h1{
+    font-size:4em;
+}
+h1 span{
+    float: left;
+    margin-left: 0.2em;
+    font-size: 1.5em;
+}
+.welllistitem{
+    box-shadow: 5px 5px 10px #4F4C4C;
+    border-radius: 90px;
+}
+.welllisticon{
+    text-align: right;
+    font-size: 6em;
+    padding-top: 0.23em;
+}
+.welllisttitle{
+    text-align: left;
+    font-size: 6em;
+    margin-left: 0.5em;
+}
+.welllisttitle a{
+    //color: chocolate;
+    color: #C85252;
+}
+.headblock{
+    margin-bottom:5em;
+}
+#shortcutimg{
+    width:200px;
+    border-radius:50%;
+}
+
+.headblock #username, #useruid, #qrcode{
+    color: #C85252;
+}
+.headblock #username {
+    text-align: left;
+    font-size: 3.5em;
+    font-weight: bold;
+    padding-top: 0.5em;
+    padding-left: 1.5em;
+}
+.headblock #useruid {
+    font-size: 3em;
+    text-align: left;
+    color: gray;
+    width: 80%;
+    padding-left: 1.8em;
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.headblock #qrcode {
+    font-size: 9em;
+    margin-top: 20%;
+    text-shadow: 2px 2px 2px #A19E9E;
+}
+
+.welllisticon .glyphicon{
+    color: #C85252;
+    text-shadow: 5px 3px 7px #A19E9E;
+}
+
+.welllisttitle .badge{
+    font-size: 35px;
+    background-color: red;
+}

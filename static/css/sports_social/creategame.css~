@@ -1,0 +1,84 @@
+
+.msginfo{
+    font-size:0.6em;
+    color: red;
+}
+
+#costcheckbox{
+    height:33px;
+    margin-top:8px;
+}
+.costcheckboxinfo{
+    font-size:2.5em;
+    color: gray;
+}
+.costdetail span{
+    font-size:2em;
+}
+
+.datepicker tr td, th{
+    font-size:2.5em;
+}
+
+#myModal{
+    margin-top:10%;
+}
+.modal-dialog{
+    width:90%;
+    height:65%;
+}
+#addressinfo{
+    font-size:2em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+#allmap {width: 100%; height: 80%;overflow: hidden;margin:0;}
+
+.maparea{
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.addressnotifyinfo{
+    font-size:2em;
+    color:gray;
+}
+
+.qeditor_fullscreen .textarea,
+.textarea {
+    background-color: #ffffff;
+    border: 1px solid gray;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border linear .2s, box-shadow linear .2s;
+    -moz-transition: border linear .2s, box-shadow linear .2s;
+    -o-transition: border linear .2s, box-shadow linear .2s;
+    transition: border linear .2s, box-shadow linear .2s;
+    padding: 4px 6px;
+    font-size: 1.5em;
+    line-height: 20px;
+    color: #555555;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    vertical-align: middle;
+    outline: none;
+    height: 10em;
+}
+
+.qeditor_fullscreen .textarea{
+    height: 90%;
+}
+
+.qeditor_fullscreen .qeditor_toolbar a,
+.qeditor_toolbar a{
+    font-size: 2em;
+    margin-right: 25px;
+}
+
+.qeditor_toolbar span span{
+    font-size: 2em;
+    margin-right: 25px;
+}

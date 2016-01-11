@@ -1,0 +1,17 @@
+function checkimagesize(filepath){
+	var MAXSIZE = 100 * 1024;
+	var ERROR_IMGSIZE = "图片大小不能超过300K";
+	var filetarget = document.getElementById("upfile").files.item(0);
+	if( filetarget.size > 0 && filetarget.size < 3*MAXSIZE){
+		  var src = window.URL.createObjectURL(filetarget);	 
+		  $("#previewimg").attr('src', src);
+		  $("#previewimg").show();
+		  cropperpreviewimage();
+	}else{
+		if(filetarget.size < 1){
+		  alert("文件错误！");
+		}else{
+		  alert(ERROR_IMGSIZE);
+		}
+	}
+}

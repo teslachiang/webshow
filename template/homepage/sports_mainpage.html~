@@ -1,0 +1,7 @@
+%include('sports_mainpage.tpl', title="首页")
+
+<div class="container">
+  
+</div>
+
+%include('sports_mainpagefooter.tpl')

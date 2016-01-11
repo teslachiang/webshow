@@ -1,0 +1,3 @@
+$("#addressstring").click(function(){  
+    $("#myModal").modal('show');
+});

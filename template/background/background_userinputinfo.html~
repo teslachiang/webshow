@@ -1,0 +1,273 @@
+%include("background.tpl", title="user records")
+
+<script type="text/javascript" src="/static/js/jquery.qeditor.js"></script>
+<link href="http://cdn.staticfile.org/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/jquery.qeditor.css" type="text/css" media="screen" />
+
+<script type="text/javascript" src="/static/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="/static/js/jquery.shCircleLoader-min.js"></script>
+
+<style type="text/css" media="screen">
+  #username{
+   float: right;
+  }
+  .framepage{
+    margin-top:2em;
+  }
+
+  .textarea {
+    background-color: #ffffff;
+    border: 1px solid gray;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border linear .2s, box-shadow linear .2s;
+    -moz-transition: border linear .2s, box-shadow linear .2s;
+    -o-transition: border linear .2s, box-shadow linear .2s;
+    transition: border linear .2s, box-shadow linear .2s;
+    padding: 4px 6px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #555555;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    vertical-align: middle;
+    outline: none;
+    height: 36em;
+  }
+</style>
+<div class="container">
+
+  <div class="page-header">
+    <h1>文章管理系统 <small id="username">{{username}} <a href="/sports/background/signin" class="btn btn-danger">退出</a></small> </h1>
+  </div>
+
+
+  <ul class="nav nav-tabs nav-justified">
+    <li role="presentation" class="active"><a href="#releasedarticle" id="tabmyarticle" aria-controls="releasedarticle" role="tab" data-toggle="tab">发布过的文章</a></li>
+    <li role="presentation"><a href="#createarticle" aria-controls="createarticle" role="tab" data-toggle="tab">创建新文章</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="releasedarticle">
+       <div class="framepage">
+         <iframe src="/sports/background/signedframepage?email={{email}}" style="width:100%; height:60em" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes"></iframe>
+       </div>
+    </div>
+
+
+    <!-- ========= tabpanel 2 ========= -->
+
+
+    <div role="tabpanel" class="tab-pane" id="createarticle">
+      <form id="articleform" style="margin-top:2em;">
+        <div class="form-group">
+          <label for="articletitle">文章标题</label>
+          <input type="text" class="form-control" maxlength="50" id="articletitle" placeholder="请输入文章标题">
+        </div>
+        <div class="form-group">
+          <label for="">发布板块</label>
+          <div class="input-group">
+            <input type="text" class="form-control" id="articleblock" placeholder="请输入板块的关键字，如：跑步，获取全部板块可输入*查找">
+            <span class="input-group-btn">
+              <button class="btn btn-default" id="articleblocksearch" type="button">查找板块</button>
+            </span>
+          </div><!-- /input-group -->
+
+          <select id="articleblockselect" class="form-control" size="4">
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="addtags">标签</label>
+          <input type="text" class="form-control" maxlength="100" id="addtags" placeholder="如: 足球 马拉松 奥林匹克公园">
+          <span id="helpBlock" class="help-block">利用空格作为分割标签的关键字</span>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="upfile">上传图片</label>
+              <div class='uploadobject'>
+                <input type='file' id='upfile' name='upfile' accept='.png,.jpg,.jpeg,.gif' class='up_input'><span class='up_icon'></span>             
+              </div>
+              <p class="help-block">选择本地图片文件，将上传的图片文件的链接添加到文章中，图片文件不大于2M.</p>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <button type='button' id='uploadbutton' data-loading-text='上传中...' autocomplete='off' class='btn btn-warning'>上传图片</button>
+          </div>
+          <div class="col-md-5">
+            <div class='imageshowarea'></div>
+          </div>
+        </div>
+       
+       
+        <textarea id="articlecontent" class="textarea"></textarea>
+        <a class="btn btn-default" id="submitarticle">发布该文章</a>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="mymodalmsgbox" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">警告</h4>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  function pagejumptolist(){
+     window.location.href = "http://localhost:9011/sports/background/signed";
+  }
+
+  $("#tabmyarticle").click(function(){
+     $(".framepage iframe").attr("src", "/sports/background/signedframepage?email={{email}}");
+  })
+
+  $("#submitarticle").click(function(){
+     //check the no rules input elements
+     var title = $("#articletitle").val();
+     var block = $("#articleblock").val();
+     var tags = $("#addtags").val();
+     var content = $(".qeditor_preview").val();
+
+     
+     
+     if(title.length < 2 ){
+       $("#mymodalmsgbox .modal-content .modal-body").text("标题内容不能小于2个字符！");
+       $("#mymodalmsgbox").modal('show');
+       return false;
+     }
+     if(title.replace(/(\s*)/g, "").length < 2){
+       $("#mymodalmsgbox .modal-content .modal-body").text("标题内容不能小于2个字符！");
+       $("#mymodalmsgbox").modal('show');
+       return false;                                 
+     }
+
+     if(block.length < 2 ){
+       $("#mymodalmsgbox .modal-content .modal-body").text("板块填写不正确！");
+       $("#mymodalmsgbox").modal('show');
+       return false;
+     }
+
+     if(tags.length < 1 ){
+       $("#mymodalmsgbox .modal-content .modal-body").text("请填写标签！");
+       $("#mymodalmsgbox").modal('show');
+       return false;
+     }
+
+     if(tags.content < 50 ){
+       $("#mymodalmsgbox .modal-content .modal-body").text("发布内容太少，请添加有效信息！");
+       $("#mymodalmsgbox").modal('show');
+       return false;
+     }
+
+     // post to server check content
+
+     $.post("/sports/background/submitarticle", {title: title, username: '{{email}}', block: block, tags:tags, content: content}, function(data){
+                   if(data['status'] == 0){
+                       // success
+                       $("#mymodalmsgbox .modal-content .modal-body").text("文章发布成功！");
+                       $("#mymodalmsgbox").on('hidden.bs.modal', function (e) {
+                           $("#articleform")[0].reset();
+                           $(".qeditor_preview").empty();
+                       })
+                   }else if(data['status'] == -3){
+                      // block is wrong   
+                       $("#mymodalmsgbox .modal-content .modal-body").text("板块不存在，请重新填写！");
+                   }else if(data['status'] == -4){
+                     // article is not in rule    
+                       $("#mymodalmsgbox .modal-content .modal-body").text("文章不符合发布要求，文字内容应不少于50字");
+                   }else{
+                     // other error    
+                       $("#mymodalmsgbox .modal-content .modal-body").text("文章发布错误 code:"+data['status']+"，请稍后再试！");
+                   }
+                   $("#mymodalmsgbox").modal('show');
+                   return false;
+            },"json");
+  })
+</script>
+
+<script type="text/javascript">
+  $(function(){
+      //var selected = $("#articleblockselect option:selected").text()
+      $("#articleblockselect").hide();
+      $("#uploadbutton").hide();
+      $("#articlecontent").qeditor({});
+  })
+</script>
+
+<script type="text/javascript" src="/static/background_myadmin.js"></script>
+<style type="text/css" media="screen">
+  .imageshowarea{
+    text-align: center;
+  }
+</style>
+<script type="text/javascript">
+  $(".uploadobject").on('change', '#upfile', function(){
+	 $(".imageshowarea").empty();
+	 $(".imageshowarea").append('<img src="" id="previewimg" style="width:50%; height:14em;" alt="" />');
+	 
+	 var flag = checkimagesize(this.value, 'upfile');
+     if(flag){
+	   $("#uploadbutton").show();
+	 }else{
+       $(".imageshowarea").empty();
+       $("#uploadbutton").hide();
+     }					
+  })
+
+  $("#uploadbutton").click(function(){
+     $(".imageshowarea").append('<div id="loader" style="width: 100px; height: 100px"></div>');
+     $("#loader").shCircleLoader();
+     ajaxFileUpload({username:'{{username}}'},'upfile');
+  })
+</script>
+
+<script type="text/javascript">
+
+  $("#articleblocksearch").click(function(){
+     $("#articleblocksearch").attr("disabled", true);
+     $("#queryalert").remove();
+     if($("#articleblock").val() == ""){
+       $("#articleblockselect").before("<div class='alert alert-danger' id='queryalert' role='alert'>关键字为空！！</div>")
+       $("#articleblocksearch").attr("disabled", false);
+       return;
+     }
+     $.post("/sports/background/ajaxqueryblock", {keyword:$("#articleblock").val()}, function(data){
+        if(data['status'] == -1){
+          $("#articleblockselect").before("<div class='alert alert-danger' id='queryalert' role='alert'>没有找到相关的板块!</div>");
+        }else{
+          $("#articleblockselect").empty();
+          for(var i=0; i< data['result'].length; i++){
+             $("#articleblockselect").append("<option>"+data['result'][i]+"</option>");
+          }
+          $("#articleblockselect").show();
+
+          $("#articleblockselect option").click(function(){
+             $("#articleblock").val(this.text);
+          });
+          $("#articleblockselect").focusout(function(){
+             $("#articleblockselect").hide();
+             $("#articleblockselect").empty();
+          });
+
+        }
+        $("#articleblocksearch").attr("disabled", false);
+     },"json");
+  })
+</script>
+

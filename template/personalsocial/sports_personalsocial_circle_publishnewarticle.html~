@@ -1,0 +1,122 @@
+%include("sports_pagebase.tpl", title="发表文章")
+
+<style type="text/css" media="screen">
+  
+  .articlepublish{
+     font-size:16px;
+  }
+
+  .articletextarea textarea{
+     width: 100%;
+     height: 8em;
+     resize:none;
+     font-size:40px;
+     border: 3px solid gray;
+  }
+  .articleimageadd span{
+     font-size: 8em;
+     margin:0 20px 0 20px;
+  }
+  .articleimageadd{
+    height:20em;
+  }
+  .uploadimage{
+    position: relative;
+    overflow: hidden;
+    float: left;
+    margin-top: 20px;
+  }
+
+  .uploadimage input[type=file]{
+    opacity: 0;
+    position: absolute;
+    top: 9px;
+    font-size: 8px;
+    height: 110px;
+    width: 125px;
+    margin: 0 0px 0 21px;
+  }
+
+  .uploadimage img{
+    width: 125px;
+    height: 125px;
+    margin: 0 0px 0 21px;
+  }
+  .articlepublish .well span{
+     font-size:4em;
+  }
+
+  .articlepublish .well div[class ^=col-xs]:nth-child(2){
+    text-align: left;
+  }
+
+  .articlepublish .well div[class ^=col-xs]:nth-child(3){
+    color: gray;
+  }
+</style>
+
+<div class="container articlepublish">
+  <div class="articletextarea">
+    <textarea name="" id="" rows="5" cols="" tabindex=""></textarea>    
+  </div>
+
+  <hr />
+  <div class="articleimageadd">
+    
+  </div>
+
+  <hr />
+
+  <div class="well">
+    <div class="row">
+      <div class="col-xs-2">
+        <span class="glyphicon glyphicon-grain"></span>
+      </div>
+      <div class="col-xs-7">
+        <span class="opentowho" onclick="opentowhomodal()">对谁开放</span>
+      </div>
+      <div class="col-xs-3">
+        <span class="opentowhoselected">公开</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="well">
+    <div class="row">
+      <div class="col-xs-2">
+        <span class="glyphicon glyphicon-hand-right"></span>
+      </div>
+      <div class="col-xs-8">
+        <span class="alerttosee" onclick="alerttoseemodal()">提醒谁看</span>
+      </div>
+      <div class="col-xs-2">
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-danger removemsgbox" style="display:none">
+  <p>您要删除该照片？</p>
+  <p><a class="btn btn-danger">确定</a> <a class="btn btn-warning">取消</a></p>
+</div>
+
+<div class="modal fade" id="mypublisharticleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary modalfootersure">确定</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="/static/js/sports_social/publisharticle.js"></script>
+

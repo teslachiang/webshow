@@ -1,0 +1,63 @@
+<!-- Modal -->
+
+<style type="text/css" media="screen">
+
+   #myqrcodeModal{
+       font-size: 16px;
+   }
+   .qrdialog{
+     width:90%;
+     margin-top:20%;
+   }
+   #myqrModalLabel{
+    font-size: 3em;
+    font-weight: bold;
+    text-shadow: 1px 2px 2px gray;
+    color: brown;
+  }
+
+   #myqrModalLabel img{
+      width: 3em;
+      height: 3em;
+      margin-right: 0.5em;
+   }
+
+   #myqrcodeModal .qrbody p {
+      text-align: center;
+   }
+   #myqrcodeModal .qrbody p img{
+      width: 50em;
+      height: 50em;
+   }
+  #myqrcodeModal .qrhelp{
+    font-size: 3em;
+    text-align: center;
+  }
+  #myqrcodeModal #qrclose{
+     float: right;
+   }
+</style>
+<div class="modal fade" id="myqrcodeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog qrdialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myqrModalLabel"><img id="shortcutimg" src="/static/caoren.jpg" class="" alt="" /> <span>生萝卜条</span></h4>
+       </div>
+      <div class="modal-body qrbody">
+        <p>
+          <img src="/static/sobobtest.png" class="" alt="" />
+        </p>
+        <p class="help-block qrhelp">扫描上面二维码加关注</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" id="qrclose" data-dismiss="modal"><span class="qrclosebtn">关闭</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $("#qrcode").click(function(){
+      $("#myqrcodeModal").modal("show");
+  })
+</script>

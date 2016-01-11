@@ -1,0 +1,30 @@
+%include('register_base.tpl', title="用户登录")
+
+<div class="usersign_cbody">
+<form>
+  <div class="input-group">
+    <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
+    <input type="text" class="form-control" id="username" maxlength="10" placeholder="请输入用户名 (2-10位汉字、英文字母、数字、符号的组合)">
+  </div>
+  <div class="input-group">
+    <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></div>
+    <input type="password" class="form-control" id="password" maxlength="10" placeholder="请输入密码 (6-10位英文字母或数字)">
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <a href="/sports/register" id="register" class="badge loginlink">注册帐号</a> 
+    </div>
+    <div class="col-sm-4">
+      
+    </div>
+    <div class="col-sm-4">
+      <a href="" id="forgetpwd" class="badge loginlink">忘记密码</a>      
+    </div>
+  </div>
+
+  <p><a href="" id="loginsign" class="btn btn-default"><span class="sportsfontcolor">登录</span></a></p> 
+
+</form>
+</div>
+<div class="alert alert-info usersign_alertinfo" role="alert" style="display:none"></div>
+<script type="text/javascript" src="/static/js/usersign/usersign.js"></script>

@@ -1,0 +1,46 @@
+%include('sports_pagebase.tpl', title="收件箱")
+<link rel="stylesheet" href="/static/css/sports_publicdefine.css" type="text/css" media="screen" />
+<style type="text/css" media="screen">
+  .well.mailalertinfo {
+    text-align: left;
+    border-radius: 30px;
+  }
+</style>
+<div class="container">
+  <div class="input-group searchinputgroup">
+    <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search"></span></span>
+    <input type="text" class="form-control" placeholder="邮件名" aria-describedby="basic-addon1">
+  </div>
+
+  <hr />
+
+  <div class="searchresultlist">
+%if len(itemlist.keys()) == 0:
+<p class="emptyinfoshow">收件箱为空</p>
+%else:
+%for key, val in itemlist.items():
+    <div class="well mailalertinfo">
+      <div class="row">
+        <div class="col-xs-1">
+          <span class="glyphicon glyphicon-envelope taskicon"></span>
+        </div>
+        <div class="col-xs-7">
+          <h1 class="titletext">{{val['title']}}</h1>
+        </div>
+        <div class="col-xs-4 eleminfocolor">
+          <p>来自:{{val['from']}}</p>
+          <p>日期:{{val['date']}}</p>
+        </div>
+      </div>
+    </div>
+%end
+%end
+  </div>  <!-- end of searchresultlist -->
+</div>
+
+<script type="text/javascript">
+  $(function(){  
+    $(".titlewell").prepend('<span class="glyphicon glyphicon-arrow-left" onClick="javascript:history.back(-1)"></span>');
+    $(".titlewell").append('<span class="glyphicon glyphicon-plus titleaddgame" onclick="location=\'/sports/personalsocial/addprovidesubject\'"></span>');
+  })
+</script>

@@ -1,0 +1,53 @@
+%include("sports_pagebase.tpl", title="我的社交", footer="footersocial")
+<link rel="stylesheet" href="/static/css/mypublic_mainpage.css" type="text/css" media="screen" />
+<div class="container">
+
+%include("sports_headblock.tpl", nickname=userinfo['nickname'], username=userinfo['username'], md5id=md5id, shortcut=userinfo['shortcut'])
+
+<div class="well welllistitem">
+  <div class="row">
+    <div class="col-xs-2 welllisticon">
+      <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+    </div>
+    <div class="col-xs-8 welllisttitle">
+      <a href="/sports/personalsocial/schedule">活动日程</a>
+    </div>
+  </div>
+</div>
+
+<div class="well welllistitem">
+  <div class="row">
+    <div class="col-xs-2 welllisticon">
+      <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+    </div>
+    <div class="col-xs-8 welllisttitle">
+      <a href="/sports/personalsocial/providesubject">科目教授</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="well welllistitem">
+  <div class="row">
+    <div class="col-xs-2 welllisticon">
+      <span class="glyphicon glyphicon-leaf" aria-hidden="true"></span>
+    </div>
+    <div class="col-xs-8 welllisttitle">
+      <a href="/sports/personalsocial/friendlist">好友列表</a>
+    </div>
+  </div>
+</div>
+
+<div class="well welllistitem">
+  <div class="row">
+    <div class="col-xs-2 welllisticon">
+      <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+    </div>
+    <div class="col-xs-8 welllisttitle">
+      <a href="/sports/personalsocial/circle">活动圈</a>
+    </div>
+  </div>
+</div>
+
+</div>
+

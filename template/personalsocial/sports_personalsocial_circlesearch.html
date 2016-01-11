@@ -1,0 +1,41 @@
+%include("sports_pagebase.tpl", title="搜索运动圈")
+<style type="text/css" media="screen">
+  .well{
+    text-align: center;
+  }
+  .title{
+     font-size:3em;   
+     font-family: -webkit-pictograph;
+     text-shadow: 1px 2px 2px gray;
+  }
+
+  #Inputkeyword{
+     font-size:3em;
+     height:2em;
+  }
+  #search{
+     height:6em;
+  }
+  #search span{
+    font-size: 3.5em;
+  }
+</style>
+
+<div class="well well-lg">
+  <span class="title">搜索运动圈</span>
+</div>
+
+
+<div class="container">
+  
+<div class="input-group">
+      <input type="text" class="form-control" id="Inputkeyword" placeholder="请输入运动圈名称关键字">
+      <span class="input-group-btn">
+        <button class="btn btn-primary" type="button" id="search"><span>搜索</span></button>
+      </span>
+    </div><!-- /input-group -->
+
+<hr />
+   <!-- 展示搜索结果 用panel 组件，没有title和footer -->
+</div>
+

@@ -1,0 +1,118 @@
+%include('sports_mainpage.tpl', title='享乐', username=username, imagelink='/static/caoren.jpg')
+<style type="text/css" media="screen">
+
+.wrapper{
+    position: absolute;
+	z-index: 1;
+    width: 100%;
+    top: 140px;
+	bottom: 150px;
+	background: #ccc;
+	overflow: hidden;
+  }
+
+  #scroller{
+	position: absolute;
+	z-index: 1;
+    width: 100%;
+    user-select: none;
+    text-size-adjust: none;
+    transform: translateZ(0);
+  }
+
+  .list-group{
+     font-size:16px;
+  }
+  li.list-group-item {
+     padding: 2em 2em 2em 2em;
+  }
+  .list-group-item p{
+     margin-top:0.8em;
+     font-size: 2.2em;
+  }
+  .art_title{
+    font-size: 2.5em;
+  }
+  .art_timestamp{
+     float: right;
+     font-size: 1em;
+  }
+  
+  .backtotop{
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    margin: 30% 0 0 88%;
+    background-color: #eee;
+    z-index: 999;
+    text-align: center;
+    padding: 9px 0px 0 6px;
+    border-radius: 50%;
+    border: 5px solid #D77272;
+    text-shadow: 2px 2px 2px gray;
+  }
+
+  .backtotop span{
+    font-size: 5em;
+    color: #C85252;
+  }
+
+  #contentloader{
+     width:150px;
+     height:150px;
+     margin: 60% 0 0 45%;
+  }
+  #contentloader .shcl{
+     z-index: 9999;
+  }
+</style>
+
+%include('sports_mainpagefooter.tpl')
+
+<!-- searchcomponent end -->
+%if articlelist is None or len(articlelist) == 0:
+<p class="nocontentinfo">目前没有数据</p>
+%else:
+<div id="contentloader"></div>
+<div class="backtotop">
+  <span class="glyphicon glyphicon-open" onclick="backtotop()"></span>
+</div>
+
+<div class="wrapper">
+<div id="scroller">
+<ul class="list-group">
+  %for art in articlelist:
+  <li class="list-group-item" linkurl="/sports/mainpage/article?id={{art['artid']}}">
+    <span class="art_title">{{art['title']}}</span>
+    <p>
+      <span class="label label-primary art_block" onclick="queryblock($(this))">{{art['block']}}</span>
+      <span class="art_timestamp">{{art['timestamp'][2:-3]}}</span>
+    </p>
+  </li>
+  %end
+</ul>
+</div>
+</div>
+%end
+
+<script type="text/javascript" src="/static/js/iscroll-probe.js"></script>
+<script type="text/javascript" src="/static/js/jquery.shCircleLoader-min.js"></script>
+<script type="text/javascript" src="/static/js/homepage/homepage.js"></script>
+
+<script type="text/javascript">
+
+  function searchcontent(){
+    $(".searchcomponent").toggle();
+  }
+
+  $(function(){
+    $(".searchcomponent").hide();
+    var headblock = '<span class="glyphicon glyphicon-search seachcontent" onClick="searchcontent()"></span>';
+    %if username == None:
+       headblock += '<span class="glyphicon glyphicon-user" onClick="javascript:window.location.href=\'/sports/login\'"></span>';
+    %end
+    $(".titlewell").prepend(headblock);
+    $("#footerarticle").addClass('active');
+  })
+</script>
+

@@ -1,0 +1,33 @@
+.addschedule{
+    text-align:right;
+    padding-right:1em;
+    font-size:2.4em;
+}
+
+.usershortcut{
+    width:200px;
+    border-radius:50%;
+    float: left;
+}
+.username{
+    font-size:4em;
+}
+.messageinfo{
+    font-size:2.5em;
+}
+
+.titletext{
+    font-size:3em;
+}
+
+.well .date{
+    font-size:1.9em;
+    margin-bottom: 10px;
+}
+.well .gameinfo{
+    font-size: 1.5em;
+}
+
+.welltask{
+    border-radius:30px;
+}

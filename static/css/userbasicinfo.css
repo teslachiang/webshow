@@ -1,0 +1,204 @@
+#pageback{
+    font-size:3em;
+    float:left;
+}
+.userinfotable{
+    table-layout: fixed;
+    font-size: 1em;
+}
+
+.userinfotable tbody tr{
+    height:10em;
+    border-top: 1px solid gray;
+}
+
+.userinfotable tbody tr td {
+    padding-top: 0.8em;
+    font-size: 3.5em;
+    color: rgb(3, 73, 148);
+}
+
+.userinfotable tbody td span[type=second]{
+    float:right;
+    font-size:1em;
+}
+
+
+#shortcut img{
+    width:150px;
+    height:150px;
+    float:right;
+    border-radius: 50%;
+    margin-top: -0.6em;
+}
+
+.shortcutpreview {
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  background-color: #f7f7f7;
+  width: 100%;
+  text-align: center;
+  width: 263px;
+  height: 148px;
+
+  margin-left: 16em;
+  border-radius: 50%;
+  border: 4px solid gray;
+}
+
+.shortcutpreview > img {
+  max-width: 100%;
+}
+
+.img-container,
+.img-preview {
+  background-color: #f7f7f7;
+  width: 100%;
+  text-align: center;
+}
+
+.img-container {
+  min-height: 200px;
+  max-height: 516px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .img-container {
+    min-height: 516px;
+  }
+}
+
+.img-container > img {
+  max-width: 100%;
+}
+
+#qrcode span{
+    font-size: 2em;
+    margin-top: -10px;
+}
+
+.modal-dialog{
+    width:90%;
+}
+
+.uploadobject{
+    margin-top: -1em;
+    position: absolute;
+}
+.up_icon, .up_input 
+{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 100px;
+    height: 100px;
+    z-index: 2
+}
+#upfile{
+    opacity:0;
+}
+.up_icon {
+    overflow: hidden;
+    font-size: 0em;
+    line-height: 99em;
+    background: url(/static/imageicon.png) no-repeat 0 0;
+    z-index: 1;
+}
+
+.uploadshortcut{
+    float:right;
+    font-size:3.2em;
+}
+
+.uploadresult{
+    font-size:2em;
+}
+
+#loader{
+    margin-top: 4em;
+    margin-bottom: 4em;
+    margin-left: 45%;
+}
+
+.img-container p{
+    font-size: 2em;
+    text-align: center;
+    color: brown;
+    margin-top: 3em;
+}
+
+#words span, #regcode span{
+    width: 100%;
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.form-group label{
+    font-size: 3em;
+}
+.modal-title{
+    font-size:4em;
+}
+.input-group input, button{
+    font-size: 2.5em;
+    height: 84px;
+}
+
+.form-group input{
+    height: 80px;
+    font-size:2.5em;
+}
+
+.radio input[type=radio]{
+    width:1em;
+    height:1em;
+}
+.radio label{
+    margin-left:1em;
+    font-size:3em;
+}
+.radio label span{
+    margin-left:1em;
+}
+.help-block{
+    font-size:2em;
+}
+#myUserInfoModal .modal-dialog{
+    margin-top: 20%;
+}
+#myUserInfoModal .modal-footer button:first-child{
+    float: left;
+}
+#modalmsgbox{
+    font-size:2em;
+}
+
+#myUserInfoModal .modal-footer button.imgrotate{
+    float: left;
+    width: 2em;
+    margin-right: 1em;
+}
+
+#myUserInfoModal .row{
+    height:10em;
+}
+
+#myUserInfoModal .row .col-xs-2 p{
+    margin-top:7.2em;
+    font-size: 1.2em;
+    width: 25em;
+}
+
+.quitblock{
+    text-align:center;
+}
+
+.quitblock a{
+    font-size: 4em;
+    width:50%;
+}

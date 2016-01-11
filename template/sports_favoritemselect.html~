@@ -1,0 +1,171 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  
+
+  <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/jquery.popmenu.js"></script>
+
+    <title>SOBOB 选择项目</title>
+
+    <style type="text/css" media="screen">
+      #demo_box{
+            width: 100%;
+            padding-top: 30%;
+        }
+      .demo_li{
+       float: left;
+    list-style: none;
+    width: 29%;
+    text-align: center;
+    height: 11%;
+    background-color: #33860F;
+    border: 1px solid white;
+    padding: 10% 2% 15% 2%;
+    margin: 22px 28px 4px 6px;
+    border-radius: 30px;
+    box-shadow: 6px 8px 15px gray;
+    font-size: 52px;
+    font-weight: bold;
+    text-shadow: 1px 3px 2px black;
+    color: cornsilk;
+      }
+
+      .demo_li:hover{
+        background-color: #1abc9c;
+      }
+        .fa{
+            font-size: 40px;
+            line-height: 70px;
+        }
+        .fa-bars{
+            color: #3498db;
+        }
+        pre{
+            font-family: Consolas,Liberation Mono,Courier,monospace;
+            font-size: 13px;
+        }
+        @media screen and (orientation: portrait){
+            pre{
+                overflow-x: scroll;
+            }
+        }
+
+      .subselect{
+      display:none;
+      position: absolute;
+      background: rgba(0, 0, 0, 0.8) none repeat scroll 0 0 !important;
+     
+      width: 100%;
+      height: 100%;
+      padding: 30% 5% 30% 5%;
+      }
+    .subitem{
+
+      float: left;
+      list-style: none;
+      width: 30%;
+      height: 20%;
+      background-color: yellowgreen;
+      margin: 9px;
+      border-radius:35px;
+      font-size: 39px;
+      font-weight: bold;
+      padding: 11% 0 0 9%;
+      box-shadow: 3px 5px 5px gray;
+      }
+      .subitem:hover{
+        // background-color: #ff2211;
+      }
+      .subbutton{
+        margin-bottom: 10%;
+      }
+      .subbutton button{
+       font-size:45px;
+       margin-left:5%;
+       color: white;
+       border-radius:19px;
+       box-shadow:1px 1px 5px #aaa;
+       width: 20%;
+       height: 8%;
+       border:0;
+      }
+      .subbutton button:first-child{
+        margin-right:30%;
+        background-color: darkorange;
+      }
+      .subbutton button:last-child{
+        background-color: green;
+        margin-left:20%;
+      }
+    </style>
+</head>
+
+<body>
+  <div id="demo_box">
+            <!-- <div class="pop_ctrl"><i class="fa fa-bars">here!!!</i></div> -->
+            <ul id="demo_ul">
+                <li class="demo_li">舞蹈</li>
+                <li class="demo_li">田径</li>
+                <li class="demo_li">自行车类</li>
+                <li class="demo_li">球类</li>
+                <li class="demo_li">冰雪运动</li>
+                <li class="demo_li">户外运动</li>
+                <li class="demo_li">水上运动</li>
+                <li class="demo_li">竞击类</li>
+                <li class="demo_li">射击类</li>
+                <li class="demo_li">传统活动</li>
+                <li class="demo_li">棋牌类</li>
+                <li class="demo_li">退出</li>
+            </ul>
+        </div>
+
+
+  <div class="subselect">
+    <p class="subbutton"><button>取消</button><button>提交</button></p>
+    <ul>
+      <li class="subitem">橄榄球</li>
+      <li class="subitem">篮球</li>
+      <li class="subitem">羽毛球</li>
+      <li class="subitem">乒乓球</li>
+      <li class="subitem">网球</li>
+      <li class="subitem">排球</li>
+      <li class="subitem">沙滩排球</li>
+      <li class="subitem">足球</li>
+      <li class="subitem">台球</li>
+      <li class="subitem">冰球</li>
+      <li class="subitem">曲棍球</li>
+    </ul>
+  </div>
+ <script type="text/javascript">
+   $(function(){
+      $(".demo_li").click(function(){
+         $("#demo_box").css("padding-top", "0");
+         $(".subselect").show();
+      })
+   })
+
+   $(".subbutton button").click(function(){
+      $("#demo_box").css("padding-top", "10%");
+      $(".subselect").hide();
+   })
+
+   $(".subitem").click(function(){
+      if($(this).css("background-color") == "rgb(255, 34, 17)"){
+          $(this).css("background-color", "rgb(154, 205, 50)");
+      }else{
+          $(this).css("background-color", "rgb(255, 34, 17)");
+      }
+   })
+ </script>
+</body>    
+</html>

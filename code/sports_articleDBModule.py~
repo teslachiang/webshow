@@ -1,0 +1,24 @@
+# ============== coding:utf8 ===============
+from publicdefine import *
+
+
+class SocialDBProcessModule(object):
+    """
+    """
+
+    def __init__(self, ):
+        """
+        """
+        redispool = redis.ConnectionPool(host='localhost',
+                                           port=6380,
+                                           db=0,
+                                           password='jianglei0711')
+        redis_server = redis.Redis(connection_pool=redispool)
+        self.redis_server = redis_server
+
+        redispool_admindb = redis.ConnectionPool(host='localhost',
+                                                 port=6379,
+                                                 db=0,
+                                                 password='jianglei0711')
+        self.redis_server_admindb = redis.Redis(connection_pool=redispool_admindb)
+        self.redis_pipe = self.redis_server.pipeline()

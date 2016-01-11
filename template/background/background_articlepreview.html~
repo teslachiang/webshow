@@ -1,0 +1,19 @@
+%include("background.tpl", title="user preview article")
+
+<div class="container">
+  <h1>{{article['title']}}</h1>
+  <hr />
+
+  <h4>{{article['block']}}</h4>
+  <p>
+    <div class="articleinfo">
+      <p>Tags: {{article['tags']}}</p>
+      <p>Author: {{article['author']}}</p>
+      <p>TimeStamp: {{article['timestamp']}}</p>
+    </div>
+  </p>
+  <hr />
+  <div class="content">
+    {{article['content']}}
+  </div>
+</div>

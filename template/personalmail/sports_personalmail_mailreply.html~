@@ -1,0 +1,290 @@
+%include('sports_personalmail.tpl', title="私信箱-撰写")
+
+<script type="text/javascript" src="/static/js/jquery.qeditor.js"></script>
+<link href="http://cdn.staticfile.org/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/jquery.qeditor.css" type="text/css" media="screen" />
+
+<script type="text/javascript">
+  $(function(){
+     $(".title").text("撰写邮件");
+  })
+</script>
+
+
+<style type="text/css" media="screen">
+  .textarea {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border linear .2s, box-shadow linear .2s;
+    -moz-transition: border linear .2s, box-shadow linear .2s;
+    -o-transition: border linear .2s, box-shadow linear .2s;
+    transition: border linear .2s, box-shadow linear .2s;
+    padding: 4px 6px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #555555;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    vertical-align: middle;
+    outline: none;
+    height: 400px;
+  }
+  </style>
+
+<style type="text/css" media="screen">
+
+  .form-group label{
+    font-size:3em;
+  }
+  .form-control{
+    height:4em;
+  }
+  .qeditor_preview{
+    overflow-y: hidden;
+    border: 2px solid #C3C0C0;
+    border-radius: 6px;
+    min-height:50em;
+  }
+
+  .qeditor_toolbar{
+    font-size:3em;
+  }
+
+  #addcontactor{
+  font-size: 3em;
+    color: #3698CB;
+    margin: 1.8em 0em 0 1em;
+  }
+
+  .fa{
+    font-size: 3em;
+  }
+  .operationbutton{
+     width:30%;
+     font-size:4em;
+  }
+  #sendmail{
+    float: right;
+  }
+  #cancelmail{
+    float: left;
+  }
+</style>
+
+
+<style type="text/css" media="screen">
+  .modal-dialog{
+        width:90%;
+      }
+
+      .uploadobject{
+      margin-top: -1em;
+      position: absolute;
+      }
+      .up_icon, .up_input 
+      {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 100px;
+        height: 100px;
+        z-index: 2
+      }
+      #upfile{
+        opacity:0;
+      }
+      .up_icon {
+        overflow: hidden;
+        font-size: 0em;
+        line-height: 99em;
+        background: url(/static/imageicon.png) no-repeat 0 0;
+        z-index: 1;
+      }
+      .iconnote{
+       font-size: 2em;
+       margin-top: 1.5em;
+       margin-left: -2em;
+       position: absolute;
+      }
+      .uploadshortcut{
+         float:right;
+      }
+      .uploadshortcut span, .closebtn, .savebtn{
+         font-size:4em;
+      }
+      .uploadresult{
+         font-size:2em;
+      }
+      .shortcutpreview{
+         width: 5em;
+         height: 5em;
+      margin-top: 1em;
+      margin-bottom: -1em;
+      }
+
+      #loader{
+          margin-top: 4em;
+          margin-bottom: 4em;
+          margin-left: 45%;
+      }
+
+      .imageshowarea p{
+          font-size: 2em;
+          text-align: center;
+          color: brown;
+          margin-top: 3em;
+      }
+
+  .modal-footer button:first-child{
+    float: left;
+  }
+</style>
+
+<div class="container">
+  <form>
+  <div class="form-group">
+    <label for="exampleInputEmail1">标题</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="标题">
+  </div>
+<div class="row">
+  <div class="col-xs-10">
+    <div class="form-group">
+      <label for="exampleInputPassword1">收件人</label>
+      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="收件人">
+    </div>
+  </div>
+  <div class="col-xs-2">
+    <span class="glyphicon glyphicon-plus-sign" id="addcontactor"></span>
+  </div>
+</div>
+  
+
+  <hr />
+
+  <textarea id="post_body"></textarea>
+  <hr />
+  <p>
+    <button class="btn btn-warning operationbutton" id="cancelmail">取消</button>
+    <button class="btn btn-success operationbutton" id="sendmail">发送</button>
+  </p>
+  
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal"><span class="closebtn">关闭</span></button>
+        <button type="button" class="btn btn-success" data-dismiss="modal"><span class="savebtn">确定</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function fillmodalcontent(title, content){
+      $("#myModalLabel").text(title);
+
+      $(".modal-body").empty();
+
+      $(".modal-body").append(content);
+      $("#myModal").modal("show");
+  }
+
+  function addcontactormodal(){
+     var title = "添加收件人";
+     var content = "<div class='input-group'>\
+         <input type='text' class='form-control' placeholder='请输入联系人关键字'>\
+         <span class='input-group-btn'>\
+           <button class='btn btn-default' type='button'>搜索</button>\
+         </span>\
+         </div>\
+         <hr />\
+         <div class='searchresults'>\
+           <ul class='list-group'>\
+             <li class='list-group-item'><button type='button' class='btn btn-default' data-toggle='button' aria-pressed='false' autocomplete='off'>test1</button></li>\
+             <li class='list-group-item'><button type='button' class='btn btn-default' data-toggle='button' aria-pressed='false' autocomplete='off'>test2</button></li>\
+             <li class='list-group-item'><button type='button' class='btn btn-default' data-toggle='button' aria-pressed='false' autocomplete='off'>test3</button></li>\
+             <li class='list-group-item'><button type='button' class='btn btn-default' data-toggle='button' aria-pressed='false' autocomplete='off'>test4</button></li>\
+             <li class='list-group-item'><button type='button' class='btn btn-default' data-toggle='button' aria-pressed='false' autocomplete='off'>test5</button></li>\
+           </ul>\
+         </div> ";
+     fillmodalcontent(title, content);
+  }
+
+  function addurllinkmodal(){
+     var title = "添加链接";
+     var content = "<div class='form-group'>\
+          <label for='exampleInputEmail1'>网址</label>\
+          <input type='text' class='form-control' id='exampleInputEmail1' placeholder='链接网址 如：http://www.sobob.wang'>\
+        </div>";
+     fillmodalcontent(title, content);
+  }
+  function addimagemodal(){
+     var title = "添加图片";
+     var content = "<div class='form-group'>\
+          <label for='exampleInputEmail1'>图片网址</label>\
+          <input type='text' class='form-control' id='exampleInputEmail1' placeholder='图片网址 如：http://www.sobob.wang/icon.png'>\
+        </div>\
+        <p style='font-size:1.5em; color:gray'>输入一个图片网址或上传本地图片</p>\
+        <hr />\
+        <div class='row'>\
+          <div class='col-xs-2'>\
+            <div class='uploadobject'>\
+              <input type='file' id='upfile' name='upfile' accept='.png,.jpg,.jpeg' class='up_input'><span class='up_icon'></span>  \
+            </div>\
+          </div>\
+          <div class='col-xs-6'>\
+            <span class='label label-default iconnote'>点击图标选择图片文件</span>\
+          </div>\
+          <div class='col-xs-4'>\
+            <button type='button' id='uploadbutton' data-loading-text='上传中' autocomplete='off' class='btn btn-default uploadshortcut'><span class='glyphicon glyphicon-cloud-upload'></span><span>上传图片</span></button>\
+          </div>\
+        </div>\
+        <br />\
+        <div class='imageshowarea'>\
+        </div>";
+        fillmodalcontent(title, content);
+  }
+</script>
+
+<script type="text/javascript">
+  $(function(){
+      $("#post_body").qeditor({});
+     
+      var toolbar = $("#post_body").parent().find(".qeditor_toolbar");
+      var link = toolbar.find("a.qe-image");
+      link.attr("data-action","");
+      link.click(function(e){
+        addimagemodal();
+        return false;
+      });
+
+      var urllink = toolbar.find("a.qe-link");
+      urllink.attr("data-action","");
+      urllink.click(function(e){
+        addurllinkmodal();
+        return false;
+      });
+      
+  })
+</script>
+
+<script type="text/javascript">
+  $("#addcontactor").click(function(){
+     addcontactormodal();
+  })
+</script>
+
+%include('sports_footer.tpl')

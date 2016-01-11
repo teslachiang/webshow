@@ -1,0 +1,148 @@
+%include("sports_pagebase.tpl", title="个人社交-修改活动")
+<link href="/static/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="/static/css/bootstrap-switch.css" type="text/css" media="screen" />
+<script type="text/javascript" src="/static/js/bootstrap-switch.js"></script>
+
+<link rel="stylesheet" href="/static/css/bootstrap-datepicker.min.css" type="text/css" media="screen" />
+<script type="text/javascript" src="/static/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap-datepicker.fr-CH.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap-datepicker.zh-CN.min.js"></script>
+
+<script type="text/javascript" src="/static/js/jquery.qeditor.js"></script>
+
+<link rel="stylesheet" href="/static/css/jquery.qeditor.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="/static/css/sports_social/creategame.css" type="text/css" media="screen" />
+
+<div class="container">
+  <div class="form-group">
+    <label for="tasktitle">活动标题<span class="msginfo titlemsginfo">*</span></label>
+    <input type="text" class="form-control" id="tasktitle" maxlength="20" placeholder="请输入活动标题（不超过20字）" value="{{taskobj['title']}}" />
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="form-group">
+        <label for="startdate">活动日期<span class="msginfo startdatemsginfo">*</span></label>
+        <div class="input-group date" id="startdate">
+          <input type="text" data-date-start-date="0d" class="form-control" value="{{taskobj['startdate']}}" readonly>
+          <span class="input-group-addon">
+            <i class="glyphicon glyphicon-calendar"></i>
+          </span>
+        </div>
+      </div>  
+    </div>
+
+    <div class="col-xs-6">
+      <div class="form-group">
+        <label for="startsenddate">报名时段<span class="msginfo senddatemsginfo">*</span></label>
+        <div class="input-group input-daterange">
+          <input type="text" class="form-control" value="{{taskobj['startenter']}}" readonly>
+          <span class="input-group-addon">
+            <i class="glyphicon glyphicon-menu-right"></i>
+          </span>
+          <input type="text" class="form-control" value="{{taskobj['endenter']}}" readonly>
+        </div>
+      </div>  
+    </div>
+    
+  </div>
+
+  <div class="form-group">
+    <label for="taskcost">活动费用</label>
+    <div id="taskcost">
+      <div class="row">
+        <div class="col-xs-3">
+          <span class="costcheckboxinfo">是否免费?</span>
+          </div>
+        <div class="col-xs-3">
+          <div class="switch" id="costcheckbox">
+            %if taskobj['cost'] == 0:
+            <input type="checkbox" checked />
+            %else:
+            <input type="checkbox" />
+            %end
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="input-group costdetail">
+            <span class="input-group-addon" id="costvalueinfo">人均(元)</span>
+             %if taskobj['cost'] == 0:
+            <input type="text" class="form-control" id="costvalue" maxlength="10" value="1" aria-describedby="costvalueinfo" />
+            %else:
+            <input type="text" class="form-control" id="costvalue" maxlength="10" value="{{taskobj['cost']}}" aria-describedby="costvalueinfo" />
+            %end
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="trhead">活动描述<span class="msginfo descriptionmsginfo">*</span></label>
+    <textarea id="subjectcontent" class="form-control textarea"></textarea>
+  </div>
+  <div class="form-group">
+    <label class="trhead">活动地点<span class="msginfo addressmsginfo">*</span></label>
+    <div class="input-group">
+      <input type="text" class="form-control gameaddress" value="{{taskobj['address']}}" placeholder="搜索地址" />
+      <span class="input-group-btn">
+        <button class="btn btn-warning" id="addressstring" type="button">搜索位置</button>
+      </span>
+    </div>   
+  </div>
+  <span id="projectkey" style="display:none">{{projectkey}}</span>
+  <p class="joingame"> <a class="btn btn-success" id="submitgame">更新活动</a> </p>
+  
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+      <div class="modal-body">
+
+        <div id="addressinfo">
+          <div class="input-group">
+            <input type="text" class="form-control" id="suggestId" aria-describedby="searchaddress" placeholder="输入位置关键字">
+            <span class="input-group-btn">
+              <button class="btn btn-primary" id="search" type="button">搜索</button>
+            </span>
+          </div><!-- /input-group -->
+        </div>
+
+        <div  class="maparea">
+          <div id="allmap"></div>
+        </div>
+
+        <div class="selectresult">
+      
+        </div>
+        <div class="selectedresult" style="display:none">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" finish="0" id="addaddressfinish" class="btn btn-success" data-dismiss="modal">完成</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style type="text/css" media="screen">
+  .selectresult tr td{
+     font-size: 2em;
+  }
+</style>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8A0hLVrPvQzDurrAdcligIPQ"></script>
+<script type="text/javascript" src="/static/js/sports_social/creategame.js"></script>
+<!-- <script type="text/javascript" src="http://api.map.baidu.com/api?type=quick&ak=8A0hLVrPvQzDurrAdcligIPQ&v=1.0"></script> -->
+<script type="text/javascript">
+  $(function(){
+     $(".titlewell .title").text("更新活动");
+     var description = "{{!taskobj['descript']}}";
+     $(".qeditor_preview").html(description);
+  })
+</script>

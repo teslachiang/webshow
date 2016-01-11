@@ -1,0 +1,98 @@
+.titleicon{
+    font-size: 5em;
+    padding-top: 0.25em;
+    text-shadow: 1px 3px 3px gray;   
+}
+.titleicon:first-child{
+    float: left;
+}
+.titleicon:last-child{
+    float: right;
+}
+.panel h1{
+    font-size:4em;
+}
+.panel-heading{
+    height:10em;
+}
+.panel-body{
+    text-align:center;
+}
+.titlegamedate{
+    float:right;
+    color: gray;
+    font-size:2.5em;
+  }
+
+.gameinfo{
+    float: right;
+    font-size: 2em;
+    margin-top: 0.5em;
+  }
+.joingame{
+    width: 60%;
+    margin-bottom: 0.5em;
+    font-size: 3.5em;
+}
+td.trhead {
+    width: 25%;
+}
+td:first-child {
+    font-size: 45px;
+    color: gray;
+}
+.gameblocks{
+    padding-top:20px;
+}
+.trcontent{
+    font-size:2.5em;
+}
+
+.trcontent .badge{
+    font-size:1em;
+    background-color: darkmagenta;
+}
+#checkmap{
+    float: right;
+    font-size:1em;
+}
+.getalljoiner{
+    font-size: 1em;
+    float: right;
+}
+.labeldescript{
+    float:left;
+    font-size: 45px;
+    color: gray;
+}
+
+.gamedescript{
+    font-size: 2.5em;
+    margin-bottom: 1em;
+    text-align: center;
+}
+.gamedescriptcontent{
+    text-align:left;
+    padding-left: 1em;
+}
+.gamedescript p{
+    font-size:0.8em;
+}
+
+#myModal{
+    margin-top:10%;
+}
+.modal-dialog{
+    width:90%;
+}
+
+#addressinfo{
+    float: left;
+    font-size:2em;
+}
+
+.modal-footer button{
+    font-size: 2.5em;
+    width: 20%;
+}
+#allmap {width: 100%; height: 60%; overflow: hidden;margin:0;}

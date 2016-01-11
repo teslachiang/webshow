@@ -1,0 +1,84 @@
+%include("sports_pagebase.tpl", title="个人文章")
+
+
+<style type="text/css" media="screen">
+  #inputsearch{
+     height: 7em;
+  }
+  #searchbutton span{
+    font-size:4.18em;
+  }
+  hr{
+    border: 5px solid #eee;
+  }
+  .media{
+     margin-bottom: 2em;
+  }
+  .media-object{
+     height:12em;
+  }
+  .month{
+     font-size:4em;
+     font-weight: bold;
+     color: rosybrown;
+  }
+  .day{
+     font-size:2em;
+     color:#963228;
+  }
+</style>
+<div class="container">
+  
+  <div class="input-group">
+    <input type="text" class="form-control" id="inputsearch" placeholder="搜索个人文章">
+    <span class="input-group-btn">
+      <button class="btn btn-primary" id="searchbutton" type="button"><span>搜索</span></button>
+    </span>
+  </div><!-- /input-group -->
+
+  <hr />
+
+  <div class="articlecontent">
+    <div class="row">
+      <div class="col-xs-2">
+        <span class="month">7月</span><span class="day">11</span>
+      </div>
+      <div class="col-xs-10">
+        <div class="media">
+          <div class="media-left">
+            <a href="#">
+              <img class="media-object" src="/static/centrum_logo_headcut.jpg" alt="...">
+            </a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">Media heading</h4>
+            <p>this is a test pragrah....</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-2">
+        <span class="month">6月</span><span class="day">1</span>
+      </div>
+      <div class="col-xs-10">
+        <div class="media">
+          <div class="media-left">
+            <a href="#">
+              <img class="media-object" src="/static/tubiao.jpg" alt="...">
+            </a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">Media heading</h4>
+            <p>this is a test pragrah....</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div> <!-- end of articlecontent -->
+  
+</div>

@@ -1,0 +1,38 @@
+%rebase('base.tpl')
+
+<style type="text/css" media="screen">
+  .timeflag{
+    margin-left:20px;
+  }
+</style>
+
+<div class="container">
+ 
+  <p></p>
+
+  <ul class="nav nav-pills nav-justified" role="tablist">
+    <li class="presentation" class="active"><a href="#home" role="tab" data-toggle="tab" aria-controles="home">Home</a></li>
+%for i, nt in enumerate(newstypes.keys()):
+    <li class="presentation"><a href="#news_{{i}}" role="tab" data-toggle="tab" aria-controles="news_{{i}}">{{nt}} <span class="badge">{{len(newstypes[nt])}}</span></a></li>
+%end
+  </ul>
+
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">
+      <div class="jumbotron">
+        <h1>Sohu news tracking here!!</h1>
+        <p>the news in sohu is tracking here (auto sync evey-5min), and they all filter with different category.</p>
+        <p>Today ({{today}}) news ready, Now we have get <span class="badge">{{len(articleobj.keys())}}</span> articles.</p>
+      </div>
+    </div>
+%for i, nt in enumerate(newstypes.keys()):
+    <div role="tabpanel" class="tab-pane" id="news_{{i}}">
+      <ul>
+      %for a in newstypes[nt]:
+      <li><a href="/showarticle?key={{a}}" target="_blank">{{articleobj[a]['title']}}</a> <span class="timeflag">{{articleobj[a]['time']}}</span></li>
+      %end
+      </ul>
+      </div>
+%end
+  </div>
+</div>

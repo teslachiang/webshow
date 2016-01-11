@@ -1,0 +1,80 @@
+%include("sports_pagebase.tpl", title="个人文章")
+<link rel="stylesheet" href="/static/css/mypublic_mainpage.css" type="text/css" media="screen" />
+<style type="text/css" media="screen">
+   .btn-group{
+     float: right;
+     margin-top:10px;
+   }
+   .btn-group label.btn{
+      border-radius: 47px;
+      font-size:40px;
+   }
+   .btn-group label[class~=active]{
+      color:#434306
+   }
+
+   .operationbutton, .operationremove{
+     font-size: 50px;
+     margin-right: 40px;
+     border-radius: 25px;
+   }
+   .alert{
+      width:90%;
+      margin-left:5%;
+      border-radius: 25px;
+   }
+   .alert .col-xs-6{
+     text-align: right;
+   }
+</style>
+
+<link rel="stylesheet" href="/static/css/sports_typeselect.css" type="text/css" media="screen" />
+
+<div class="container">
+
+%if len(itemlist) == 0:
+ <p>您还没有添加定制项目</p>
+%else:
+%for item in itemlist:
+  <div class="alert alert-info">
+    <div class="row">
+      <div class="col-xs-2">
+        <span class="glyphicon glyphicon-th-large taskicon"></span>
+      </div>
+      <div class="col-xs-4">
+        <h1 class="titletext">{{item}}</h1>
+      </div>
+      <div class="col-xs-6"></div>
+    </div>
+  </div>
+%end
+%end
+</div>
+
+
+<div class="alert alert-danger removemsgbox" style="display:none">
+  <p>您确定要删除<span class="removeditem"></span>项目？</p>
+  <p><a class="btn btn-danger" id="alertremoved">确定</a> <a class="btn btn-warning" id="alertcancel">取消</a></p>
+</div>
+
+<div id="demo_box" style="display:none">
+  <ul id="demo_ul">
+    %for spk, vals in sporttypes.items():
+    <li class="demo_li">{{spk}}</li>
+    %end
+  </ul>
+</div>
+
+%for spk, vals in sporttypes.items():
+<div class="subselect" name="{{spk}}">
+  <p class="subbutton"><button>取消</button><button>提交</button></p>
+  <ul>
+    %for val in vals:
+    <li class="subitem">{{val}}</li>
+    %end
+  </ul>
+</div>
+%end
+
+<script type="text/javascript" src="/static/js/sports_typeselect.js"></script>
+<script type="text/javascript" src="/static/js/sports_article/addarticletype.js"></script>

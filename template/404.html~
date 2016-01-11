@@ -1,0 +1,24 @@
+%rebase('base.tpl')
+
+<style type="text/css" media="screen">
+  .jumbotron{
+     margin-top: 20%;
+  }
+  .f404{
+  text-align: center;
+text-shadow: 2px 2px 2px;
+  }
+  i{
+    text-transform: capitalize;
+  }
+</style>
+
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="f404"> 404 !! </h1>
+    
+    <p><i>Opps.... you requestd the page is no longer exist or not found! <i/></p>
+    <p><i>Sorry about that, please connact with admin for help!!</i></p>
+    <p style="text-align:right"><i><a href="/home"><< back to main page</a></i></p>
+  </div>
+</div>

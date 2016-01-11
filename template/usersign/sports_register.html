@@ -1,0 +1,45 @@
+%include('register_base.tpl', title="用户注册")
+
+<style type="text/css" media="screen">
+</style>
+
+<div class="usersign_cbody">
+<form>
+  <div class="input-group">
+    <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
+    <input type="email" class="form-control" maxlength="50" id="username" placeholder="邮箱地址">
+  </div>
+  <div class="input-group">
+    <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></div>
+    <input type="password" class="form-control" id="password" maxlength="10" placeholder="密码 (6-10位英文字母或数字)">
+  </div>
+
+  <div class="input-group">
+    <div class="input-group-addon"><span class="glyphicon glyphicon-knight" aria-hidden="true"></span></div>
+    <input type="text" class="form-control" id="checkcode" placeholder="验证码">
+  </div>
+  <div class="checkcodeimgblock">
+    <img class="checkcodeimg" src="/static/checkcode/{{checkword}}.png" />
+    <p class="guiderwords">(按单词中顺序输入蓝色单词的第 <img src="/static/checkcode/{{checknumber}}_number.png" />个字母及其相邻的1或2个字母)</p>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-4">
+      <a href="/sports/login" class="badge loginlink">用户登录</a>
+    </div>
+    <div class="col-sm-4">
+    </div>
+    <div class="col-sm-4">
+      <a href="/sports/forgetpwd" id="forgetpwd" class="badge loginlink">忘记密码</a>
+    </div>
+  </div>
+
+  <p><a href="" id="registersign" class="btn btn-default"><span class="sportsfontcolor">注册</span></a></p> 
+
+</form>
+</div>
+
+<div class="alert alert-info usersign_alertinfo" role="alert" style="display:none">
+</div>
+
+<script type="text/javascript" src="/static/js/usersign/usersign.js"></script>

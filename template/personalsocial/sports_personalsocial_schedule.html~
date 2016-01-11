@@ -1,0 +1,52 @@
+%include("sports_pagebase.tpl", title="活动日程")
+<link rel="stylesheet" href="/static/css/sports_social/schedule.css" type="text/css" media="screen" />
+
+<div class="container">
+<div class="well">
+  <div class="row">
+    <div class="col-xs-2">
+      <img src="/static/caoren.jpg" class="usershortcut" alt="" />
+    </div>
+    <div class="col-xs-10">
+        <p class="username">{{nickname}}</p><span class="usernamehide" style="display:none">{{username}}</span>
+        <p class="messageinfo">您的活动日程状态为：</p>
+        <span class="label label-success ongoinglabel">{{len(obj['on'])}}个进行</span> 
+        <span class="label label-danger closedlabel">{{len(obj['off'])}}个关闭</span>
+        <span class="label label-warning ownerlabel">{{len(obj['self'])}}个自创</span>
+    </div>
+  </div>
+</div>
+
+<hr />
+
+%if len(obj['data'].keys()) == 0:
+<p class="emptyinfo">您的日程表为空</p>
+%else:
+%for key, date in obj['sorted']:
+%if obj['data'][key].get('self') is True:
+  <div class="well welltask status_{{obj['data'][key]['status']}} selfwell">
+%else:
+  <div class="well welltask status_{{obj['data'][key]['status']}}">
+%end
+  <div class="row">
+    <div class="col-xs-1">
+      <span class="glyphicon glyphicon-tasks taskicon"></span>
+    </div>
+    <div class="col-xs-9">
+      <h1 class="titletext">{{obj['data'][key]['title']}}<span class="titlekey" style="display:none">{{key}}</span></h1>
+    </div>
+    <div class="col-xs-2">
+      <p class="date"><span class="eleminfocolor">{{obj['data'][key]['startdate']}}</span></p>
+        %if obj['data'][key]['status']=='on':
+        <span class="label label-success gameinfo">状态:进行中</span>
+        %else:
+        <span class="label label-danger gameinfo">状态:关闭</span>
+        %end
+    </div>
+  </div>
+  
+</div>
+%end
+%end
+
+<script type="text/javascript" src="/static/js/sports_social/schedule.js"></script>

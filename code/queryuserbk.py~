@@ -1,0 +1,17 @@
+#  ======= coding:utf8 =======
+from threading import Thread
+import ujson
+import hashlib
+
+
+def main():
+    """
+    """
+    srcbuffer = ['test001@test.com']
+
+    md5 = hashlib
+    for i in range(10000000):
+        print i
+
+
+main()

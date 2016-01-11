@@ -1,0 +1,176 @@
+%include("background.tpl", title="user records")
+
+<script type="text/javascript" src="/static/js/sorttable.js"></script>
+
+<style type="text/css" media="screen">
+  /* Sortable tables */
+  table.sortable thead {
+    background-color:#eee;
+    color:#666666;
+    font-weight: bold;
+    cursor: default;
+}
+table.sortable .th:not(.sorttable_sorted):not(.sorttable_sorted_reverse):not(.sorttable_nosort):after { 
+    content: " \25B4\25BE" 
+}
+
+  .pagenav{
+     text-align:center;
+  }
+</style>
+<div class="alert alert-info">
+  您目前发布的文章数为: <span class="badge">{{artlen}}</span> 
+</div>
+
+<hr />
+<div class="input-group">
+  <input type="text" class="form-control" id="searchinput" placeholder="输入标题关键字">
+  <span class="input-group-btn">
+    <button class="btn btn-success" id="searchbutton" type="button">查找文章</button>
+  </span>
+</div><!-- /input-group -->
+<span class="help-block"> 输入"*"获得所有文章，输入标题关键字+板块名称（如：郎平+排球）或 输入标题关键字 或输入板块名称（+排球） </span>
+<hr />
+
+<table class="table sortable">
+  <tr>
+    <td class="th">#</td>
+    <td class="sorttable_nosort">Title</td>
+    <td class="th">Create At</td>
+    <td class="th">Latest Modify</td>
+    <td class="sorttable_nosort">Operation</td>
+  </tr>
+   
+     %for i, val in enumerate(articles):
+     <tr>
+         <td>{{i+1}}</td>
+         <td><a href="/sports/background/checkarticle?artid={{val['id']}}&email={{email}}&password={{password}}" target="_blank">{{val['title']}}</a></td>
+         <td>{{val['createtime']}}</td>
+         <td>
+             %if val.get('modifytime') is None:
+                {{val['createtime']}}
+             %else:
+                <span style="color:red">{{val['modifytime']}}</span>
+             %end
+         </td>
+         <td>
+           <a href="/sports/background/modifyarticle?artid={{val['id']}}&email={{email}}&password={{password}}" target="_blank" class="btn btn-success">修改文章</a> 
+           <a href="#" class="btn btn-danger removearticle" artid="{{val['id']}}">删除文章</a>
+         </td>
+     </tr>
+     %end
+</table>
+
+<hr />
+
+<div class="pagenav">
+  <nav>
+    <ul class="pager">
+      <li><a href="#" id="prepage">上一页</a></li>
+      <li><a href="#" id="nextpage">下一页</a></li>
+    </ul>
+  </nav>
+</div>
+
+<script type="text/javascript">
+  $(function(){
+     var url = window.location.href;
+     var reg = /pagetype=(.+?)&curpage=(.+?)&{0,1}$/;
+     if(url.indexOf('curpage=0') > 0 || url.indexOf('curpage=') < 0){
+        $(".pager li:first").addClass("disabled");
+     }else{
+        var elem = url.match(reg);
+        if(elem < 3){
+           $(".pager li:first").addClass("disabled");
+           $(".pager li:last").addClass("disabled");                  
+        }else{
+           var pagetype = elem[1];
+           var curpage = elem[2];
+           if(pagetype == "next" && (Number(curpage)+10) >= Number("{{artlen}}")){
+             $(".pager li:last").addClass("disabled"); 
+           }else{
+             $(".pager li:last").removeClass("disabled");
+           }
+           if(pagetype == "pre" && Number(curpage)<= 10){
+             $(".pager li:first").addClass("disabled");
+           }else{
+             $(".pager li:first").removeClass("disabled");                 
+           }
+        }
+       }
+  })
+
+</script>
+
+<script type="text/javascript">
+
+ $("#prepage").click(function(){
+     var url = window.location.href;
+     var reg = /pagetype=(.+?)&curpage=(.+?)&{0,1}$/;
+     var elem = url.match(reg);
+     var curpage = elem[2];
+     $("#prepage").attr("href", "/sports/background/signedframepage?email={{email}}&password={{password}}&pagetype=pre&curpage="+(Number(curpage)-10));
+  })
+
+  $("#nextpage").click(function(){
+     var url = window.location.href;
+     var reg = /pagetype=(.+?)&curpage=(.+?)&{0,1}$/;
+     var elem = url.match(reg);
+     if(elem == null){
+        $("#nextpage").attr("href", "/sports/background/signedframepage?email={{email}}&password={{password}}&pagetype=next&curpage="+10);
+     }else{
+        var curpage = elem[2];
+        $("#nextpage").attr("href", "/sports/background/signedframepage?email={{email}}&password={{password}}&pagetype=next&curpage="+(Number(curpage)+10));
+     }
+  })
+  
+  $(".removearticle").click(function(){
+      $.post("/sports/background/removearticle", {email:"{{email}}", password:"{{password}}", artid:$(this).attr("artid")}, function(data){
+          if(data['status'] == 0){
+              alert("删除成功！");
+              window.location.reload();
+          }else{
+              alert("错误！！ code："+data['status']);
+          }
+      }, "json");
+      return false;
+  })
+
+  $("#searchbutton").click(function(){
+     // empty form info
+     $(".table tbody").empty();
+     $(".pagenav").hide();
+     var inputcontent = $("#searchinput").val();
+     if(inputcontent != ""){
+        $.post("/sports/background/searcharticles", {email:"{{email}}", password:"{{password}}", keyword: inputcontent}, function(data){
+               if(data['status'] > 0){
+                   // find result
+                   for(var i=0; i<data['result'].length; i++){
+                       var elem = data['result'][i];
+                       if(elem['modifytime'] == null){
+                          elem['modifytime'] = elem['createtime'];   
+                       }
+                       var trcontent="<tr><td>"+(i+1)+"</td><td><a href='/sports/background/checkarticle?artid="+elem['id']+
+                             "&email={{email}}&password={{password}}' target='_blank'>"+
+                             elem['title']+"</a></td><td>"+elem['createtime']+
+                             "</td><td>"+elem['modifytime']+"</td><td><a href='/sports/background/modifyarticle?artid="+elem['id']+
+                             "&email={{email}}&password={{password}}' target='_blank' class='btn btn-success'>修改文章</a><a class='btn btn-danger removearticle' artid='"+
+                             elem['id']+"{{val['id']}}'>删除文章</a></td></tr>";
+                       $(".table tbody").append(trcontent);
+                   };
+               }else if(data['status'] == 0){
+                   // find nothing!!!
+                  $(".table").append("<p>没有找到任何相关文章！</p>");
+               }else{ // find error!!
+                  alert("error!! code:"+data['status']);
+               }
+        }, "json");       
+     }
+  })
+</script>
+
+<script type="text/javascript">
+  $(function(){
+     $(".page-header").hide();
+  })
+</script>

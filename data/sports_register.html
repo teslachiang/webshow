@@ -1,0 +1,198 @@
+%rebase('base.tpl', title="用户注册")
+
+<style type="text/css" media="screen">
+  form{
+      margin-top:40%;
+    text-align: center;
+    width:80%;
+    margin:0 auto;
+  }
+
+  .input-group{
+    font-size:3em;
+    margin-bottom: 1em;
+  }
+
+  h1{
+    margin-bottom: 2em;
+    font-size: 3em;
+  }
+  .input-group input{
+    height:5em;
+  }
+
+.input-group-addon span{
+  font-size:4em;
+  }
+  #login{
+    margin-top: 2em;
+    font-size: 3em;
+    width:60%;
+  }
+
+  #checkword{
+  margin-top: 0.25em;
+    position: absolute;
+    width: 7em;
+    margin-left: -6em;
+  }
+
+#checkcode{
+  width:40%;
+  }
+
+iframe{
+   border:0;
+   width:50%;
+   position: absolute;
+   margin-left:-25%;
+  }
+ 
+  .cbody{
+   text-align:center;
+   margin-top:40%;
+  }
+
+  .guiderwords{
+      font-size: small;
+      margin-left: 0.5em;
+      position: absolute;
+      margin-top: 1.55em;
+      color: gray;
+  }
+
+  .alert{
+     width: 80%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 4em;
+    font-size: large;
+  }
+
+
+  .guiderwords{
+  font-size: small;
+  margin-left: 0.5em;
+  margin-top: -0.8em;
+  position: absolute;
+  color: gray;
+  }
+
+</style>
+
+<div class="cbody">
+<h1>用户注册</h1>
+<form>
+  <div class="input-group">
+    <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
+    <input type="text" class="form-control" id="username" maxlength="10" placeholder="请输入用户名 (2-10位汉字、英文字母、数字、符号的组合)">
+  </div>
+  <div class="input-group">
+    <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></div>
+    <input type="password" class="form-control" id="password" maxlength="10" placeholder="请输入密码 (6-10位英文字母或数字)">
+  </div>
+
+  <div class="input-group">
+    <div class="input-group-addon"><span class="glyphicon glyphicon-knight" aria-hidden="true"></span></div>
+    <input type="text" class="form-control" id="checkcode" placeholder="请输入验证码">
+    <!-- <iframe src="/checkingcodepage"></iframe> -->
+    <span id="checkword"><img src="/static/{{checkword}}.png" class="" alt="" /></span>
+    <span class="guiderwords">(请输入包含蓝色单词的第 <img src="/static/{{checknumber}}_number.png" class="" alt="" />个字母在内的，其相邻的1或2个字母)</span>
+  
+  </div>
+
+  <p><a href="" id="login" class="btn btn-default">登录</a></p> 
+
+</form>
+</div>
+
+<p class="alertinfo">
+  <div class="alert alert-info" role="alert" style="display:none">
+  </div>
+</p>
+
+<script type="text/javascript">
+  function cleanalert(){
+     $(".alert").empty();
+     $(".alert").hide();
+  }
+  
+  $("#login").click(function(){
+    $(".alert").empty();
+
+    var containSpecial = /[(\ )]/;
+    var passwordcheck = /^[0-9a-zA-Z]*$/g;
+
+    var username = $("#username").val();
+    var password = $("#password").val();
+    var checkcode = $("#checkcode").val();
+
+    if(username == "" || password == "" || checkcode==""){
+        $(".alert").append("<strong>警告！</strong>用户名、密码、验证码中有没有填写的内容！");
+      $(".alert").show();
+      setTimeout("cleanalert()", 5000);
+
+      return false;
+    }
+
+    var flag=false;
+    if(username.length < 2){
+        $(".alert").append("<strong>警告！</strong>用户名长度不足2位！");                     
+        flag=true;
+    }
+
+    if(password.length < 6){
+        $(".alert").append("<p><strong>警告！</strong>密码长度不足6位！</p>");
+        flag=true;
+    }
+
+    if(checkcode.length < 2){
+        $(".alert").append("<p><strong>警告！</strong>验证码错误！</p>");                     
+        flag=true;
+    }
+
+    if(flag){
+       $(".alert").show();
+       setTimeout("cleanalert()", 3000);
+       return false;      
+    }
+    if(containSpecial.test(username)){
+      $(".alert").append("<strong>警告！</strong>用户名中包含了空格，请去除！");
+       $(".alert").show();
+       setTimeout("cleanalert()", 3000);
+       return false;
+    }
+    if(passwordcheck.test(password)==false){
+      $(".alert").append("<p>密码中包含非数字或字母字符，请去除！</p>");
+       $(".alert").show();
+       setTimeout("cleanalert()", 3000);
+       return false;
+    }
+
+    $.post("/checksigininfoconfirm", {code:checkcode, checkcode:"{{checkword}}", numbercode:"{{checknumber}}", user:username, pwd:password}, function(data){
+              $("#login").attr("disabled", false);
+              if(data['flag'] != 0){
+                // need to reload check code
+                if(data['flag'] == -1){
+                    $(".alert").append("<strong>警告！</strong>用户名已存在！");
+                }
+                else if(data['flag'] == -4){
+                    $(".alert").append("<strong>警告！</strong>验证码错误！");
+                }else if(data['flag'] == -7){
+                    $(".alert").append("<strong>警告！</strong>用户名已经存在，请登录或换个名字！");          
+                }
+                else{
+                    $(".alert").append("<strong>警告！</strong>登陆系统错误！");
+                }
+                $("#checkword img").attr("src", "/static/"+ data['ck'][1] +".png");
+                $(".guiderwords img").attr("src", "/static/"+ data['ck'][0] +"_number.png");
+                $(".alert").show();
+                setTimeout("cleanalert()", 3000);
+            }else{// return to home page
+                window.location.href="/sports";
+            }
+       },"json");
+    $("#login").attr("disabled", true);
+    return false;
+  })
+</script>

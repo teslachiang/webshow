@@ -1,0 +1,23 @@
+%include('sports_pagebase.tpl', title="垃圾箱")
+<link rel="stylesheet" href="/static/css/sports_social/socialpublic.css" type="text/css" media="screen" />
+
+<div class="container">
+  <div class="input-group searchinputgroup">
+    <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search"></span></span>
+    <input type="text" class="form-control" placeholder="邮件名" aria-describedby="basic-addon1">
+  </div>
+
+  <hr />
+
+  <div class="searchresultlist">
+    
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function(){
+    $(".titlewell").prepend('<span class="glyphicon glyphicon-arrow-left" onClick="javascript:history.back(-1)"></span>');
+    $(".titlewell").append('<span class="glyphicon glyphicon-plus titleaddgame" onclick="location=\'/sports/personalsocial/addprovidesubject\'"></span>');
+  })
+</script>
+

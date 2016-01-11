@@ -1,0 +1,19 @@
+$(function(){
+    $(".demo_li").click(function(){
+        $("#demo_box").css("padding-top", "0");
+        $(".subselect").show();
+    })
+})
+
+$(".subbutton button").click(function(){
+    $("#demo_box").css("padding-top", "10%");
+    $(".subselect").hide();
+})
+
+$(".subitem").click(function(){
+    if($(this).css("background-color") == "rgb(255, 34, 17)"){
+        $(this).css("background-color", "rgb(154, 205, 50)");
+    }else{
+        $(this).css("background-color", "rgb(255, 34, 17)");
+    }
+})

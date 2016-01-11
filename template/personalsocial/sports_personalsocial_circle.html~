@@ -1,0 +1,70 @@
+%include("sports_pagebase.tpl", title="活动圈")
+<style type="text/css" media="screen">
+ .circlebell{
+    color: #D53F15;
+    text-shadow: 1px 2px 2px gray;
+}
+ .publisharticle{
+    width: 100%;
+    height: 14em;
+    border-radius: 20%;
+}
+.publisharticle span{
+    font-size: 7em;
+    color: #E5512A;
+    padding-top: 35%;
+    text-shadow: 4px 4px 4px gray;
+}
+.itemlistpageuserinfowell .row div[class ^=col-xs]:nth-child(2){
+  text-align: left;
+}
+</style>
+
+<div class="container">
+  <div class="well itemlistpageuserinfowell">
+    <div class="row">
+      <div class="col-xs-3">
+        <img src="/static/caoren.jpg" class="usershortcut" alt="" />
+      </div>
+      <div class="col-xs-7">
+        <p class="username">{{nickname}}</p><span class="usernamehide" style="display:none">{{username}}</span>
+        <p class="messageinfo">活动圈用于朋友文章分类，目前状态为：<span class="label label-success"> 1个自创</span></p>
+      </div>
+      <div class="col-xs-2">
+        <a class="btn btn-default publisharticle" href="/sports/personalsocial/circle/publishnewarticle"><span class="glyphicon glyphicon-edit"></span></a>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+
+  %if len(circlelist) > 0:
+  <p class="alert alert-info emptyinfo">您还没有运动圈</p>
+  %else:
+  <div class="well alertlistprovidesubject itemlistpageuserinfoalert" onclick="checksubjectdetail($(this))">
+    <div class="row">
+    <div class="col-xs-2">
+      <span class="glyphicon glyphicon-th taskicon"></span>
+    </div>
+    <div class="col-xs-6">
+      <h1 class="titletext">我的活动圈</h1>
+    </div>
+    <div class="col-xs-2">
+      <span class="glyphicon glyphicon-bell providesubject_studenticon circlebell"></span>
+    </div>
+    <div class="col-xs-2">
+     <span class="glyphicon glyphicon-user providesubject_studenticon"><span class="badge">3</span></span>
+    </div>
+  </div>
+  </div>
+  %end
+</div>
+
+<script type="text/javascript">
+ $(function(){
+    $(".titlewell").prepend('<span class="glyphicon glyphicon-arrow-left titleback"\
+                            onClick="javascript:history.back(-1)"></span>');
+    $(".titlewell").append('<span class="glyphicon glyphicon-plus titleaddgame" onclick="location=\'/sports/personalsocial/circle/createcircle\'"></span>');
+ })
+</script>
+

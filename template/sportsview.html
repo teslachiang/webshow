@@ -1,0 +1,26 @@
+%rebase('base.tpl')
+
+<style type="text/css" media="screen">
+  .date{
+      margin-left:2em;
+      margin-right:2em;
+  }
+</style>
+
+<div class="container">
+
+  <h1>sobob sports article list!</h1>
+<hr />
+
+  <div class="articlelist">
+    <ul>
+      %for k, v in articlelist.items():
+      <li><a href="/sportsarticle?key={{k}}">{{v['title']}}</a> 
+        <span class="date">{{v['time']}}</span>
+        <span class="badge">{{v['hot']}}</span>
+      </li>
+      %end
+    </ul>
+  </div>
+  
+</div>
